@@ -2,7 +2,7 @@ export const SITE = {
   name: "TicHub",
   tagline: "Gestión de material para centros educativos",
   description:
-    "TicHub centraliza el inventario, los préstamos, las incidencias, los consumibles y la documentación técnica de un centro educativo en una plataforma clara, trazable y fácil de usar.",
+    "Centraliza inventario, préstamos, incidencias, consumibles y documentación técnica en una plataforma clara, trazable y pensada para el día a día de un centro educativo.",
   url: "https://tichub.es",
 }
 
