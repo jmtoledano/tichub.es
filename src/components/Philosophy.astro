@@ -1,0 +1,31 @@
+---
+import Icon from "./Icon.astro"
+import { PHILOSOPHY } from "../consts"
+---
+
+<section class="border-b border-border bg-muted">
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24">
+    <div>
+      <h2 class="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        Diseñado para centros reales, no para departamentos gigantes
+      </h2>
+      <p class="mt-4 text-pretty leading-relaxed text-muted-foreground">
+        TicHub asume que quien lo usa tiene poco tiempo y muchas otras responsabilidades. Por eso
+        prioriza la claridad y la trazabilidad sin obligar a montar procesos complejos.
+      </p>
+    </div>
+
+    <ul class="grid gap-3">
+      {
+        PHILOSOPHY.map((point) => (
+          <li class="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
+            <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent-soft text-accent">
+              <Icon name="check" class="h-4 w-4" />
+            </span>
+            <span class="text-sm leading-relaxed text-foreground">{point}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

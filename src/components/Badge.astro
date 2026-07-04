@@ -1,0 +1,20 @@
+---
+interface Props {
+  tone?: "blue" | "red" | "amber" | "green"
+  class?: string
+}
+const { tone = "blue", class: className = "" } = Astro.props
+
+const tones: Record<string, string> = {
+  blue: "bg-[var(--color-badge-blue-bg)] text-[var(--color-badge-blue)] ring-[var(--color-badge-blue)]/15",
+  red: "bg-[var(--color-badge-red-bg)] text-[var(--color-badge-red)] ring-[var(--color-badge-red)]/15",
+  amber: "bg-[var(--color-badge-amber-bg)] text-[var(--color-badge-amber)] ring-[var(--color-badge-amber)]/20",
+  green: "bg-[var(--color-badge-green-bg)] text-[var(--color-badge-green)] ring-[var(--color-badge-green)]/15",
+}
+---
+
+<span
+  class={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${tones[tone]} ${className}`}
+>
+  <slot />
+</span>

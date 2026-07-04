@@ -1,0 +1,15 @@
+---
+interface Props {
+  class?: string
+  size?: "sm" | "md"
+}
+const { class: className = "", size = "md" } = Astro.props
+const nameSize = size === "sm" ? "text-base" : "text-lg"
+---
+
+<a href="/" class={`inline-flex items-baseline gap-2.5 ${className}`} aria-label="TicHub — inicio">
+  <span class={`font-semibold tracking-tight text-foreground ${nameSize}`}>TicHub</span>
+  <span class="border-l border-border pl-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+    Asset Management
+  </span>
+</a>
