@@ -1,0 +1,75 @@
+---
+import Icon from "../Icon.astro"
+import Badge from "../Badge.astro"
+
+const rows = [
+  { material: "Portátil Lenovo ThinkPad", ref: "INV-1042", cat: "Portátiles", loc: "Aula 12", status: "Disponible", tone: "green" },
+  { material: "Proyector Epson EB-X06", ref: "INV-0871", cat: "Proyección", loc: "Aula 3", status: "En préstamo", tone: "blue" },
+  { material: "Carro de tablets (16 ud.)", ref: "INV-0330", cat: "Tablets", loc: "Departamento TIC", status: "Reparación", tone: "amber" },
+  { material: "Cámara Canon EOS 250D", ref: "INV-0155", cat: "Audiovisual", loc: "Biblioteca", status: "Disponible", tone: "green" },
+  { material: "Altavoz portátil JBL", ref: "INV-0492", cat: "Audio", loc: "Gimnasio", status: "Desaparecido", tone: "red" },
+] as const
+---
+
+<div class="overflow-hidden rounded-2xl border border-border-strong bg-background shadow-xl shadow-slate-900/10 ring-1 ring-slate-900/5">
+  <!-- Top bar -->
+  <div class="flex items-center justify-between border-b border-border px-4 py-3">
+    <div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-sm font-semibold tracking-tight text-foreground">Inventario</span>
+      </div>
+      <p class="text-[11px] text-muted-foreground">50 materiales encontrados</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1 rounded-md border border-border bg-card px-2 py-1 text-[11px] font-medium text-foreground">
+        <Icon name="csv" class="h-3.5 w-3.5 text-muted-foreground" />
+        Gestionar CSV
+      </span>
+      <span class="inline-flex items-center gap-1 rounded-md bg-accent px-2.5 py-1 text-[11px] font-semibold text-accent-foreground shadow-sm shadow-accent/25">
+        + Nuevo material
+      </span>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="flex flex-wrap items-center gap-2 border-b border-border bg-muted px-4 py-3">
+    <div class="flex min-w-[120px] flex-1 items-center gap-1.5 rounded-md border border-border bg-card px-2 py-1.5 text-[11px] text-muted-foreground">
+      <Icon name="eye" class="h-3.5 w-3.5" />
+      <span>Buscar material…</span>
+    </div>
+    {["Categoría", "Ubicación", "Estado"].map((f) => (
+      <div class="hidden items-center justify-between gap-2 rounded-md border border-border bg-card px-2 py-1.5 text-[11px] text-muted-foreground sm:flex">
+        <span>{f}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+      </div>
+    ))}
+  </div>
+
+  <!-- Table -->
+  <div class="px-2 py-1">
+    <table class="w-full border-collapse text-left">
+      <thead>
+        <tr class="border-b-2 border-border text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+          <th class="px-2 py-2.5">Material</th>
+          <th class="hidden px-2 py-2.5 sm:table-cell">Referencia</th>
+          <th class="hidden px-2 py-2.5 md:table-cell">Categoría</th>
+          <th class="hidden px-2 py-2.5 lg:table-cell">Ubicación</th>
+          <th class="px-2 py-2.5">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r, i) => (
+          <tr class:list={["text-[11px]", i % 2 === 1 && "bg-muted/60"]}>
+            <td class="px-2 py-2 font-medium text-foreground">{r.material}</td>
+            <td class="hidden px-2 py-2 font-mono text-muted-foreground sm:table-cell">{r.ref}</td>
+            <td class="hidden px-2 py-2 text-muted-foreground md:table-cell">{r.cat}</td>
+            <td class="hidden px-2 py-2 text-muted-foreground lg:table-cell">{r.loc}</td>
+            <td class="px-2 py-2">
+              <Badge tone={r.tone} class="!px-1.5 !py-0 !text-[10px]">{r.status}</Badge>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

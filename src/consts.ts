@@ -172,7 +172,7 @@ export const PRICING = [
     featured: false,
   },
   {
-    name: "Centro",
+    name: "Centro gestionado",
     price: "Desde consulta",
     period: "por centro / año",
     description: "Todo incluido y alojado por nosotros. El centro solo recibe sus credenciales.",

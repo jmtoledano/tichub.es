@@ -1,5 +1,14 @@
 ---
+import InventoryMockup from "./mockups/InventoryMockup.astro"
+import IncidentsMockup from "./mockups/IncidentsMockup.astro"
+import LoansMockup from "./mockups/LoansMockup.astro"
 import { SCREENSHOTS } from "../consts"
+
+const mockups = {
+  Inventario: InventoryMockup,
+  Incidencias: IncidentsMockup,
+  Préstamos: LoansMockup,
+} as const
 ---
 
 <section id="capturas" class="scroll-mt-16 border-b border-border bg-muted">
@@ -15,32 +24,27 @@ import { SCREENSHOTS } from "../consts"
       </p>
     </div>
 
-    <div class="mt-12 flex flex-col gap-10 lg:gap-14">
+    <div class="mt-12 flex flex-col gap-12 lg:gap-16">
       {
-        SCREENSHOTS.map((shot, index) => (
-          <div
-            class:list={[
-              "grid items-center gap-6 lg:grid-cols-2 lg:gap-10",
-              index % 2 === 1 && "lg:[&>figure]:order-2",
-            ]}
-          >
-            <figure class="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-              <img
-                src={shot.src}
-                alt={shot.alt}
-                width="1263"
-                height="800"
-                loading="lazy"
-                decoding="async"
-                class="block w-full"
-              />
-            </figure>
-            <div class="max-w-md">
-              <h3 class="text-xl font-semibold text-foreground">{shot.title}</h3>
-              <p class="mt-3 text-pretty leading-relaxed text-muted-foreground">{shot.description}</p>
+        SCREENSHOTS.map((shot, index) => {
+          const Mockup = mockups[shot.title as keyof typeof mockups]
+          return (
+            <div
+              class:list={[
+                "grid items-center gap-6 lg:grid-cols-2 lg:gap-12",
+                index % 2 === 1 && "lg:[&>.mockup]:order-2",
+              ]}
+            >
+              <div class="mockup">
+                <Mockup />
+              </div>
+              <div class="max-w-md">
+                <h3 class="text-xl font-semibold text-foreground">{shot.title}</h3>
+                <p class="mt-3 text-pretty leading-relaxed text-muted-foreground">{shot.description}</p>
+              </div>
             </div>
-          </div>
-        ))
+          )
+        })
       }
     </div>
   </div>

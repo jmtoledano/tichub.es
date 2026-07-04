@@ -1,0 +1,73 @@
+---
+import Icon from "../Icon.astro"
+import Badge from "../Badge.astro"
+
+const rows = [
+  { title: "Proyector sin señal", dept: "Aula 3", assignee: "M. Ruiz", age: "hace 2 h", status: "Abierta", tone: "amber", dot: "bg-[var(--color-badge-amber)]", priority: "Alta", pTone: "red" },
+  { title: "PC no arranca", dept: "Secretaría", assignee: "J. Pérez", age: "hace 1 d", status: "Asignada", tone: "blue", dot: "bg-[var(--color-badge-blue)]", priority: "Media", pTone: "amber" },
+  { title: "Impresora atascada", dept: "Sala profes", assignee: "L. Gómez", age: "hace 3 d", status: "Asignada", tone: "blue", dot: "bg-[var(--color-badge-blue)]", priority: "Baja", pTone: "green" },
+  { title: "WiFi intermitente", dept: "Biblioteca", assignee: "A. Díaz", age: "hace 5 h", status: "Abierta", tone: "amber", dot: "bg-[var(--color-badge-amber)]", priority: "Alta", pTone: "red" },
+  { title: "Pantalla táctil rota", dept: "Aula 12", assignee: "M. Ruiz", age: "hace 6 d", status: "Cerrada", tone: "green", dot: "bg-[var(--color-badge-green)]", priority: "Media", pTone: "amber" },
+] as const
+---
+
+<div class="overflow-hidden rounded-2xl border border-border-strong bg-background shadow-xl shadow-slate-900/10 ring-1 ring-slate-900/5">
+  <!-- Top bar -->
+  <div class="flex items-center justify-between border-b border-border px-4 py-3">
+    <div>
+      <span class="text-sm font-semibold tracking-tight text-foreground">Incidencias</span>
+      <p class="text-[11px] text-muted-foreground">15 incidencias</p>
+    </div>
+    <span class="inline-flex items-center gap-1 rounded-md bg-accent px-2.5 py-1 text-[11px] font-semibold text-accent-foreground shadow-sm shadow-accent/25">
+      + Nueva incidencia
+    </span>
+  </div>
+
+  <!-- Filters -->
+  <div class="flex flex-wrap items-center gap-2 border-b border-border bg-muted px-4 py-3">
+    <div class="flex min-w-[120px] flex-1 items-center gap-1.5 rounded-md border border-border bg-card px-2 py-1.5 text-[11px] text-muted-foreground">
+      <Icon name="eye" class="h-3.5 w-3.5" />
+      <span>Buscar incidencia…</span>
+    </div>
+    {["Estado", "Prioridad"].map((f) => (
+      <div class="hidden items-center justify-between gap-2 rounded-md border border-border bg-card px-2 py-1.5 text-[11px] text-muted-foreground sm:flex">
+        <span>{f}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+      </div>
+    ))}
+  </div>
+
+  <!-- Table -->
+  <div class="px-2 py-1">
+    <table class="w-full border-collapse text-left">
+      <thead>
+        <tr class="border-b-2 border-border text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+          <th class="px-2 py-2.5">Incidencia</th>
+          <th class="hidden px-2 py-2.5 md:table-cell">Dpto.</th>
+          <th class="hidden px-2 py-2.5 lg:table-cell">Asignada a</th>
+          <th class="hidden px-2 py-2.5 sm:table-cell">Abierta</th>
+          <th class="px-2 py-2.5">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r, i) => (
+          <tr class:list={["text-[11px]", i % 2 === 1 && "bg-muted/60"]}>
+            <td class="px-2 py-2">
+              <div class="flex items-center gap-2">
+                <span class={`h-1.5 w-1.5 shrink-0 rounded-full ${r.dot}`} aria-hidden="true"></span>
+                <span class="font-medium text-foreground">{r.title}</span>
+                <Badge tone={r.pTone} class="!hidden !px-1.5 !py-0 !text-[9px] lg:!inline-flex">{r.priority}</Badge>
+              </div>
+            </td>
+            <td class="hidden px-2 py-2 text-muted-foreground md:table-cell">{r.dept}</td>
+            <td class="hidden px-2 py-2 text-muted-foreground lg:table-cell">{r.assignee}</td>
+            <td class="hidden px-2 py-2 text-muted-foreground sm:table-cell">{r.age}</td>
+            <td class="px-2 py-2">
+              <Badge tone={r.tone} class="!px-1.5 !py-0 !text-[10px]">{r.status}</Badge>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -7,23 +7,28 @@
 
   /* Neutrals */
   --color-background: #ffffff;
-  --color-foreground: #1e293b;
-  --color-muted: #f4f6f8;
-  --color-muted-foreground: #64748b;
-  --color-border: #e5e7eb;
+  --color-foreground: #0f172a;
+  --color-muted: #f8fafc;
+  --color-muted-foreground: #475569;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
   --color-card: #ffffff;
 
+  /* Soft blue-tinted section background */
+  --color-surface-blue: #eff6ff;
+
   /* Institutional blue */
-  --color-accent: #3568bd;
+  --color-accent: #2f63c6;
+  --color-accent-hover: #234f9f;
   --color-accent-foreground: #ffffff;
-  --color-accent-soft: #eef3fb;
+  --color-accent-soft: #eff6ff;
 
   /* Badge tones */
-  --color-badge-blue: #3568bd;
-  --color-badge-blue-bg: #eef3fb;
+  --color-badge-blue: #2f63c6;
+  --color-badge-blue-bg: #eff6ff;
   --color-badge-red: #dc2626;
   --color-badge-red-bg: #fef2f2;
-  --color-badge-amber: #b45309;
+  --color-badge-amber: #d97706;
   --color-badge-amber-bg: #fffbeb;
   --color-badge-green: #16a34a;
   --color-badge-green-bg: #f0fdf4;
@@ -52,9 +57,31 @@
 /* Subtle grid backdrop used behind the hero */
 .bg-grid {
   background-image:
-    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 75% 70% at 50% 0%, #000 35%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 0%, #000 35%, transparent 100%);
+    linear-gradient(to right, color-mix(in oklab, var(--color-accent) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-accent) 8%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 100%);
+}
+
+/* Soft blue glow used behind the hero dashboard mockup */
+.hero-glow {
+  background: radial-gradient(
+    circle at 50% 45%,
+    color-mix(in oklab, var(--color-accent) 26%, transparent) 0%,
+    color-mix(in oklab, var(--color-accent) 10%, transparent) 40%,
+    transparent 70%
+  );
+  filter: blur(36px);
+}
+
+/* Subtle lift on interactive cards */
+.card-lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
 }

@@ -1,0 +1,41 @@
+---
+import Icon from "./Icon.astro"
+
+const items = [
+  {
+    icon: "box",
+    title: "Inventario centralizado",
+    description: "Cada equipo con su referencia, ubicación y estado en un único lugar.",
+  },
+  {
+    icon: "loan",
+    title: "Préstamos trazables",
+    description: "Quién se lleva qué, desde cuándo y qué queda pendiente de devolver.",
+  },
+  {
+    icon: "alert",
+    title: "Incidencias con historial",
+    description: "Averías con prioridad, asignación y seguimiento completo de cada caso.",
+  },
+]
+---
+
+<section class="border-b border-border bg-[var(--color-surface-blue)]">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:py-12">
+    <div class="grid gap-6 sm:grid-cols-3 sm:gap-8">
+      {
+        items.map((item) => (
+          <div class="flex items-start gap-3.5">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-sm shadow-accent/25">
+              <Icon name={item.icon} class="h-5 w-5" />
+            </span>
+            <div>
+              <h3 class="text-sm font-semibold text-foreground">{item.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
