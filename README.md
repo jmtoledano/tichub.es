@@ -1,46 +1,95 @@
-# Astro Starter Kit: Basics
+# TiCHub Website
 
-```sh
-npm create astro@latest -- --template basics
+Landing corporativa de TiCHub construida con Astro y Tailwind CSS v4.
+
+## Stack
+
+- Astro 5
+- Tailwind CSS 4 (plugin para Vite)
+- TypeScript (config strict de Astro)
+
+## Requisitos
+
+- Node.js 20+
+- npm 10+ (o pnpm)
+
+## Desarrollo local
+
+Instalar dependencias:
+
+```bash
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Arrancar servidor de desarrollo (segun flujo del proyecto):
 
-## 🚀 Project Structure
+```bash
+astro dev --background
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+Gestion del servidor en background:
+
+```bash
+astro dev status
+astro dev logs
+astro dev stop
+```
+
+Alternativa con scripts npm:
+
+```bash
+npm run dev
+```
+
+## Build de produccion
+
+```bash
+npm run build
+```
+
+Salida generada en la carpeta dist.
+
+Preview local del build:
+
+```bash
+npm run preview
+```
+
+## Estructura principal
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+.
+|- public/
+|  |- images/
+|- src/
+|  |- components/
+|  |  |- mockups/
+|  |- layouts/
+|  |- pages/
+|  |- styles/
+|- astro.config.mjs
+|- package.json
+|- tsconfig.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Despliegue en Cloudflare Pages
 
-## 🧞 Commands
+Configuracion recomendada:
 
-All commands are run from the root of the project, from a terminal:
+- Build command: npm run build
+- Build output directory: dist
+- Node version: 20
+- Framework preset: Astro
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Con el repositorio conectado a Cloudflare Pages, cada push a la rama de produccion (por ejemplo, main) dispara deploy automatico.
 
-## 👀 Want to learn more?
+## Scripts disponibles
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- npm run dev
+- npm run build
+- npm run preview
+- npm run astro
+
+## Documentacion
+
+- Astro docs: https://docs.astro.build
