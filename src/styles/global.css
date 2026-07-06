@@ -75,6 +75,25 @@
   filter: blur(36px);
 }
 
+/* Gentle float for the hero status pills */
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.hero-pill {
+  animation: hero-float 4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-pill {
+    animation: none;
+  }
+}
+
 /* Subtle lift on interactive cards */
 .card-lift {
   transition:
