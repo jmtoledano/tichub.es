@@ -54,14 +54,23 @@
   }
 }
 
-/* Subtle grid backdrop used behind the hero */
+/* Soft ambient backdrop used behind the hero: a gentle blue bloom over a
+   very fine, low-contrast grid — texture without the "graph paper" feel. */
 .bg-grid {
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--color-accent) 8%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--color-accent) 8%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 100%);
+    radial-gradient(
+      58% 62% at 18% -8%,
+      color-mix(in oklab, var(--color-accent) 11%, transparent) 0%,
+      transparent 72%
+    ),
+    linear-gradient(to right, color-mix(in oklab, var(--color-accent) 4.5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-accent) 4.5%, transparent) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    54px 54px,
+    54px 54px;
+  mask-image: radial-gradient(ellipse 78% 68% at 50% 0%, #000 32%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 0%, #000 32%, transparent 100%);
 }
 
 /* Soft blue glow used behind the hero dashboard mockup */
