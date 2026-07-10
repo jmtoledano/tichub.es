@@ -198,6 +198,7 @@ export const PRICING = [
     period: "por centro / mes",
     description: "Todo incluido y alojado por nosotros. El centro solo recibe sus credenciales.",
     features: [
+      "Usuarios ilimitados",
       "Alojamiento gestionado en nuestra infraestructura",
       "Todos los módulos activos",
       "Actualizaciones incluidas",
