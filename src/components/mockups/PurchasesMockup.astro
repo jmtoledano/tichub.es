@@ -1,0 +1,68 @@
+---
+import Icon from "../Icon.astro"
+import Badge from "../Badge.astro"
+
+const rows = [
+  { title: "Adaptadores USB-C aulas móviles", supplier: "—", amount: "142,80 €", status: "Petición", tone: "blue" },
+  { title: "Renovación de webcams", supplier: "2 presupuestos", amount: "449,00 €", status: "Presupuestos", tone: "blue" },
+  { title: "Cámaras taller multimedia", supplier: "PcComponentes", amount: "516,00 €", status: "Pedida", tone: "amber" },
+  { title: "Repuestos laboratorio de redes", supplier: "Amazon", amount: "146,00 €", status: "Cerrada", tone: "green" },
+] as const
+---
+
+<div class="overflow-hidden rounded-2xl border border-border-strong bg-background shadow-xl shadow-slate-900/10 ring-1 ring-slate-900/5">
+  <!-- Top bar -->
+  <div class="flex items-center justify-between border-b border-border px-4 py-3">
+    <div>
+      <span class="text-sm font-semibold tracking-tight text-foreground">Compras</span>
+      <p class="text-[11px] text-muted-foreground">12 compras</p>
+    </div>
+    <span class="inline-flex items-center gap-1 rounded-md bg-accent px-2.5 py-1 text-[11px] font-semibold text-accent-foreground shadow-sm shadow-accent/25">
+      + Nueva petición
+    </span>
+  </div>
+
+  <!-- Filters -->
+  <div class="flex flex-wrap items-center gap-2 border-b border-border bg-muted px-4 py-3">
+    <div class="flex min-w-[120px] flex-1 items-center gap-1.5 rounded-md border border-border bg-card px-2 py-1.5 text-[11px] text-muted-foreground">
+      <Icon name="eye" class="h-3.5 w-3.5" />
+      <span>Buscar compra…</span>
+    </div>
+    {["Estado", "Departamento", "10 / pág."].map((f) => (
+      <div class="hidden items-center justify-between gap-2 rounded-md border border-border bg-card px-2 py-1.5 text-[11px] text-muted-foreground sm:flex">
+        <span>{f}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+      </div>
+    ))}
+  </div>
+
+  <!-- Table -->
+  <div class="px-2 py-1">
+    <table class="w-full border-collapse text-left">
+      <thead>
+        <tr class="border-b-2 border-border text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+          <th class="px-2 py-2.5">Compra</th>
+          <th class="hidden px-2 py-2.5 sm:table-cell">Proveedor</th>
+          <th class="px-2 py-2.5">Importe</th>
+          <th class="px-2 py-2.5">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r, i) => (
+          <tr class:list={["text-[11px]", i % 2 === 1 && "bg-muted/60"]}>
+            <td class="px-2 py-2">
+              <div class="max-w-[140px] truncate font-medium text-foreground sm:max-w-none">{r.title}</div>
+            </td>
+            <td class="hidden px-2 py-2 text-muted-foreground sm:table-cell">{r.supplier}</td>
+            <td class="px-2 py-2">
+              <span class="inline-flex items-center rounded-md border border-border bg-card px-1.5 py-0.5 font-mono text-[10px] font-medium text-foreground">{r.amount}</span>
+            </td>
+            <td class="px-2 py-2">
+              <Badge tone={r.tone} class="!px-1.5 !py-0 !text-[10px]">{r.status}</Badge>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

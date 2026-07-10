@@ -17,12 +17,17 @@ const items = [
     title: "Incidencias con historial",
     description: "Averías con prioridad, asignación y seguimiento completo de cada caso.",
   },
+  {
+    icon: "lock",
+    title: "Copias cifradas cada día",
+    description: "Deduplicadas y con retención de hasta un año.",
+  },
 ]
 ---
 
 <section class="border-b border-border bg-[var(--color-surface-blue)]">
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:py-12">
-    <div class="grid gap-6 sm:grid-cols-3 sm:gap-8">
+    <div class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
       {
         items.map((item) => (
           <div class="flex items-start gap-3.5">

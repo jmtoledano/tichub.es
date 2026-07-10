@@ -2,7 +2,7 @@ export const SITE = {
   name: "TicHub",
   tagline: "Gestión de material para centros educativos",
   description:
-    "Centraliza inventario, préstamos, incidencias, consumibles y documentación técnica en una plataforma clara, trazable y pensada para el día a día de un centro educativo.",
+    "Centraliza inventario, préstamos, incidencias, consumibles, compras y documentación técnica en una plataforma clara, trazable y pensada para el día a día de un centro educativo.",
   url: "https://tichub.es",
 }
 
@@ -13,28 +13,38 @@ export const NAV_LINKS = [
   { label: "Documentación", href: "#documentacion" },
 ]
 
-// Real product screenshots shown in the Features section
+// Content for the "Capturas" section — each title maps to a hand-built mockup
+// component in Screenshots.astro (not an actual image file).
 export const SCREENSHOTS = [
   {
-    src: "/images/captura-inventario.png",
-    alt: "Listado de inventario de TicHub con artículos, referencias, categorías, ubicaciones y estados",
     title: "Inventario",
     description:
       "Cada equipo con su referencia, categoría, ubicación y estado (disponible, en préstamo o desaparecido), más catálogos de categorías, ubicaciones y proveedores.",
   },
   {
-    src: "/images/captura-incidencias.png",
-    alt: "Listado de incidencias de TicHub con prioridad, departamento, asignación y estado",
     title: "Incidencias",
     description:
       "Averías con prioridad, equipo afectado, departamento, persona asignada y estado (abierta o asignada), con el tiempo transcurrido desde la apertura.",
   },
   {
-    src: "/images/captura-prestamos.png",
-    alt: "Listado de préstamos de TicHub con prestatario, artículos, período y estado",
     title: "Préstamos",
     description:
       "Préstamos multiartículo con prestatario, período, fecha de devolución y estado (activo, devolución parcial o vencido) resaltando lo que se pasa de plazo.",
+  },
+  {
+    title: "Compras",
+    description:
+      "Peticiones con presupuestos de varios proveedores, pedidos, recepción del material y cierre con factura, todo trazado desde que alguien pide algo hasta que llega.",
+  },
+  {
+    title: "Consumibles",
+    description:
+      "Material fungible con tipo, stock disponible y aviso automático cuando algo se está agotando, con historial completo de entradas y salidas.",
+  },
+  {
+    title: "Auditoría",
+    description:
+      "Quién hizo qué y cuándo en cada módulo, con filtros por usuario, módulo y fecha, y exportación a CSV.",
   },
 ]
 
@@ -70,16 +80,22 @@ export const MODULES = [
     ],
   },
   {
-    title: "Base de conocimiento",
-    icon: "book",
-    badges: [] as { label: string; tone: string }[],
+    title: "Compras",
+    icon: "cart",
+    badges: [
+      { label: "5 pendientes", tone: "blue" },
+      { label: "2 vencidas", tone: "red" },
+    ],
   },
   {
-    title: "Auditoría",
-    icon: "clipboard",
-    badges: [] as { label: string; tone: string }[],
+    title: "Usuarios",
+    icon: "users",
+    badges: [{ label: "128 activos", tone: "blue" }] as { label: string; tone: string }[],
   },
 ]
+// Nota: Base de conocimiento y Auditoría no aparecen en este mockup a propósito —
+// con 8 módulos la rejilla pasaba a 3 filas y descompensaba el Hero. Los 8 siguen
+// presentes en FEATURES y SCREENSHOTS; aquí solo se cura una muestra de 6.
 
 export const PROBLEMS = [
   {
@@ -96,6 +112,11 @@ export const PROBLEMS = [
     title: "Consumibles sin stock claro",
     description: "Nadie sabe cuánto tóner, cable o material fungible queda hasta que se agota en el peor momento.",
     icon: "package",
+  },
+  {
+    title: "Compras sin seguimiento",
+    description: "Peticiones, presupuestos y pedidos repartidos entre correos y hojas de cálculo, sin saber en qué punto está cada uno.",
+    icon: "cart",
   },
   {
     title: "Inventario desactualizado",
@@ -131,6 +152,11 @@ export const FEATURES = [
     icon: "package",
   },
   {
+    title: "Compras",
+    description: "Peticiones con presupuestos de varios proveedores, pedidos, recepción del material y cierre con factura.",
+    icon: "cart",
+  },
+  {
     title: "Base de conocimiento",
     description: "Documentos internos, soluciones recurrentes, adjuntos y visibilidad segmentada por roles.",
     icon: "book",
@@ -141,14 +167,9 @@ export const FEATURES = [
     icon: "clipboard",
   },
   {
-    title: "Backups",
-    description: "Copias de seguridad y recuperación documentada para no depender de la memoria de nadie.",
+    title: "Copias de seguridad",
+    description: "Copias diarias cifradas y deduplicadas, con retención de hasta un año sin disparar el espacio ocupado.",
     icon: "database",
-  },
-  {
-    title: "Configuración",
-    description: "Ajustes del centro, correo, sesión y parámetros operativos del día a día.",
-    icon: "settings",
   },
 ]
 
@@ -173,23 +194,23 @@ export const PRICING = [
   },
   {
     name: "Centro gestionado",
-    price: "Desde consulta",
-    period: "por centro / año",
+    price: "79 €",
+    period: "por centro / mes",
     description: "Todo incluido y alojado por nosotros. El centro solo recibe sus credenciales.",
     features: [
       "Alojamiento gestionado en nuestra infraestructura",
       "Todos los módulos activos",
       "Actualizaciones incluidas",
-      "Copias de seguridad automáticas",
+      "Copias de seguridad diarias, cifradas y deduplicadas",
       "Soporte por correo",
     ],
-    cta: "Consultar precio",
+    cta: "Empezar ahora",
     featured: true,
   },
   {
     name: "Red de centros",
     price: "A medida",
-    period: "varios centros",
+    period: "desde 199 € / mes",
     description: "Para agrupaciones de centros o administraciones con varios espacios.",
     features: [
       "Todo lo del plan Centro",

@@ -25,21 +25,20 @@ import { MODULES } from "../consts"
     <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
       {
         MODULES.map((mod) => (
-          <div class="rounded-lg border border-border bg-card p-3">
+          <div class="flex h-full flex-col rounded-lg border border-border bg-card p-3">
             <div class="mb-2 flex items-center gap-2">
               <Icon name={mod.icon} class="h-4 w-4 text-muted-foreground" />
               <span class="truncate text-xs font-medium text-foreground">{mod.title}</span>
             </div>
-            {mod.badges.length > 0 && (
-              <div class="mb-2 flex flex-wrap gap-1">
-                {mod.badges.map((b) => (
-                  <Badge tone={b.tone as "blue" | "red" | "amber" | "green"} class="!px-1.5 !py-0 !text-[10px]">
-                    {b.label}
-                  </Badge>
-                ))}
-              </div>
-            )}
-            <div class="mt-1 h-6 rounded-md bg-accent/90" aria-hidden="true"></div>
+            {/* Fila de badges siempre reservada (vacía si no hay), para que todas las tarjetas midan lo mismo */}
+            <div class="mb-2 flex min-h-[18px] flex-wrap items-start gap-1">
+              {mod.badges.map((b) => (
+                <Badge tone={b.tone as "blue" | "red" | "amber" | "green"} class="!px-1.5 !py-0 !text-[10px]">
+                  {b.label}
+                </Badge>
+              ))}
+            </div>
+            <div class="mt-auto h-6 rounded-md bg-accent/90" aria-hidden="true"></div>
           </div>
         ))
       }
