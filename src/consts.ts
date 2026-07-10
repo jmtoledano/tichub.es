@@ -194,7 +194,7 @@ export const PRICING = [
   },
   {
     name: "Centro gestionado",
-    price: "79 €",
+    price: "34,99 €",
     period: "por centro / mes",
     description: "Todo incluido y alojado por nosotros. El centro solo recibe sus credenciales.",
     features: [
@@ -210,7 +210,7 @@ export const PRICING = [
   {
     name: "Red de centros",
     price: "A medida",
-    period: "desde 199 € / mes",
+    period: "desde 199,99 € / mes",
     description: "Para agrupaciones de centros o administraciones con varios espacios.",
     features: [
       "Todo lo del plan Centro",
