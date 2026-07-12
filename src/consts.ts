@@ -72,49 +72,102 @@ export const SCREENSHOTS = [
   },
 ]
 
-// Modules shown in the stylized dashboard mockup in the hero
+// Módulos del mockup animado del Hero: además del icono/badges de la tarjeta
+// de la rejilla, cada uno lleva los datos de su "vista de detalle" (a la que
+// el cursor navega automáticamente) y las 3 píldoras flotantes contextuales
+// que se muestran mientras ese módulo está activo. Ver DashboardMockup.astro.
+type ModuleRow = [main: string, sub: string, status: string, tone: "blue" | "red" | "amber" | "green"]
+
 export const MODULES = [
   {
+    key: "inventario",
     title: "Inventario",
     icon: "box",
     badges: [] as { label: string; tone: string }[],
+    sub: "50 materiales",
+    rows: [
+      ["Portátil Lenovo ThinkPad", "INV-1042", "Disponible", "green"],
+      ["Proyector Epson EB-X06", "INV-0871", "En préstamo", "blue"],
+      ["Carro de tablets (16 ud.)", "INV-0330", "Reparación", "amber"],
+    ] as ModuleRow[],
+    pills: ["50 materiales registrados", "2 en reparación", "1 desaparecido"],
   },
   {
+    key: "prestamos",
     title: "Préstamos",
     icon: "loan",
     badges: [
       { label: "5 activos", tone: "blue" },
       { label: "3 vencidos", tone: "red" },
     ],
+    sub: "8 préstamos",
+    rows: [
+      ["Laura Sánchez · Dpto. Ciencias", "2/2", "Activo", "blue"],
+      ["Grupo 4ºB · Tutoría", "1/2", "Devolución parcial", "amber"],
+      ["Marcos Ortega · Dpto. Tecnología", "0/3", "Vencido", "red"],
+    ] as ModuleRow[],
+    pills: ["5 préstamos activos", "3 préstamos vencidos", "8 préstamos en total"],
   },
   {
+    key: "incidencias",
     title: "Incidencias",
     icon: "alert",
     badges: [
       { label: "13 pendientes", tone: "blue" },
       { label: "1 cerrada", tone: "green" },
     ],
+    sub: "15 incidencias",
+    rows: [
+      ["Proyector sin señal · Aula 3", "Alta", "Abierta", "red"],
+      ["PC no arranca · Secretaría", "Media", "Asignada", "blue"],
+      ["WiFi intermitente · Biblioteca", "Alta", "Abierta", "red"],
+    ] as ModuleRow[],
+    pills: ["13 incidencias pendientes", "2 de prioridad alta", "1 cerrada hoy"],
   },
   {
+    key: "consumibles",
     title: "Consumibles",
     icon: "package",
     badges: [
       { label: "2 en préstamo", tone: "blue" },
       { label: "6 con stock bajo", tone: "amber" },
     ],
+    sub: "32 tipos",
+    rows: [
+      ["Tóner HP 415A negro", "3 uds", "Stock bajo", "amber"],
+      ["Pilas Duracell AA", "48 uds", "Disponible", "green"],
+      ["Cable HDMI 2m", "12 uds", "Disponible", "green"],
+    ] as ModuleRow[],
+    pills: ["6 consumibles con stock bajo", "32 tipos de material", "2 en préstamo"],
   },
   {
+    key: "compras",
     title: "Compras",
     icon: "cart",
     badges: [
       { label: "5 pendientes", tone: "blue" },
       { label: "2 vencidas", tone: "red" },
     ],
+    sub: "12 compras",
+    rows: [
+      ["Adaptadores USB-C aulas móviles", "142,80 €", "Petición", "blue"],
+      ["Renovación de webcams", "449,00 €", "Presupuestos", "amber"],
+      ["Cámaras taller multimedia", "516,00 €", "Pedida", "blue"],
+    ] as ModuleRow[],
+    pills: ["5 peticiones pendientes", "2 vencidas de plazo", "12 compras en curso"],
   },
   {
+    key: "usuarios",
     title: "Usuarios",
     icon: "users",
     badges: [{ label: "128 activos", tone: "blue" }] as { label: string; tone: string }[],
+    sub: "128 usuarios",
+    rows: [
+      ["Marta Sánchez · Profesorado", "Rol", "Activo", "green"],
+      ["David Romero · Dpto. Técnico", "Rol", "Activo", "green"],
+      ["Carmen Vidal · Dirección", "Rol", "Activo", "green"],
+    ] as ModuleRow[],
+    pills: ["128 usuarios activos", "6 roles configurados", "0 cuentas bloqueadas"],
   },
 ]
 // Nota: Base de conocimiento y Auditoría no aparecen en este mockup a propósito —

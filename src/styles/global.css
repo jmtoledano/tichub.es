@@ -117,9 +117,107 @@
 .hero-pill {
   animation: hero-float 4s ease-in-out infinite;
 }
+.hero-pill [data-pill-text] {
+  transition: opacity 0.2s ease;
+}
 @media (prefers-reduced-motion: reduce) {
   .hero-pill {
     animation: none;
+  }
+}
+
+/* Cursor autoplay del mockup del Hero: recorre los módulos, "hace clic" y
+   dispara la transición hacia la vista de detalle de cada uno. */
+.hero-view {
+  position: absolute;
+  inset: 0;
+  padding: 1rem;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+.hero-view.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-view[data-view="grid"].is-hidden {
+  transform: scale(0.97);
+  filter: blur(1px);
+}
+.hero-view[data-view="detail"] {
+  transform: scale(1);
+}
+.hero-view[data-view="detail"].is-hidden {
+  transform: scale(1.03);
+  filter: blur(1px);
+}
+
+.hero-tile {
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+.hero-tile.is-pressed {
+  transform: scale(0.94);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 18%, transparent);
+}
+
+.hero-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 20px;
+  height: 20px;
+  transform: translate(var(--cx, 40%), var(--cy, 45%));
+  transition: transform 0.7s cubic-bezier(0.34, 1.4, 0.64, 1);
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.35));
+}
+.hero-cursor svg {
+  display: block;
+  transition: transform 0.15s ease;
+}
+.hero-cursor.is-pressing svg {
+  transform: scale(0.82);
+}
+.hero-cursor-ripple {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-accent);
+  opacity: 0;
+  transform: scale(0.5);
+}
+.hero-cursor-ripple.is-active {
+  animation: hero-cursor-ripple 0.55s ease-out;
+}
+@keyframes hero-cursor-ripple {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-view,
+  .hero-tile,
+  .hero-cursor,
+  .hero-cursor-ripple {
+    transition: none !important;
+    animation: none !important;
+  }
+  .hero-cursor {
+    display: none;
   }
 }
 

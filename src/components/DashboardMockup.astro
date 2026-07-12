@@ -4,44 +4,186 @@ import Badge from "./Badge.astro"
 import { MODULES } from "../consts"
 ---
 
-<div class="overflow-hidden rounded-2xl border border-border-strong bg-background shadow-2xl shadow-slate-900/10 ring-1 ring-slate-900/5">
-  <!-- Top bar -->
-  <div class="flex items-center justify-between border-b border-border px-4 py-3">
-    <div class="flex items-baseline gap-2">
-      <span class="text-sm font-semibold tracking-tight text-foreground">TicHub</span>
-      <span class="hidden text-[9px] font-medium uppercase tracking-[0.16em] text-muted-foreground sm:inline">
-        Asset Management
-      </span>
+<div class="relative">
+  <div class="overflow-hidden rounded-2xl border border-border-strong bg-background shadow-2xl shadow-slate-900/10 ring-1 ring-slate-900/5">
+    <!-- Top bar -->
+    <div class="flex items-center justify-between border-b border-border px-4 py-3">
+      <div class="flex items-baseline gap-2">
+        <span class="text-sm font-semibold tracking-tight text-foreground">TicHub</span>
+        <span class="hidden text-[9px] font-medium uppercase tracking-[0.16em] text-muted-foreground sm:inline">
+          Asset Management
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-[10px] font-semibold text-accent">A</span>
+        <span class="hidden text-xs text-muted-foreground sm:inline">Administrador</span>
+      </div>
     </div>
-    <div class="flex items-center gap-2">
-      <span class="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-[10px] font-semibold text-accent">A</span>
-      <span class="hidden text-xs text-muted-foreground sm:inline">Administrador</span>
-    </div>
-  </div>
 
-  <!-- Panel -->
-  <div class="bg-muted px-4 py-4">
-    <p class="mb-3 text-xs font-semibold text-foreground">Panel de módulos</p>
-    <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+    <!-- Panel: la rejilla de módulos y las 6 vistas de detalle se superponen
+         (position:absolute) y se cruzan con un fundido; el cursor recorre la
+         rejilla en bucle y "hace clic" en cada tarjeta. Ver el <script>. -->
+    <div class="relative h-[21rem] overflow-hidden bg-muted px-4 py-4 sm:h-[19rem]" data-hero-mockup>
+      <div class="hero-view" data-view="grid">
+        <p class="mb-3 text-xs font-semibold text-foreground">Panel de módulos</p>
+        <div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+          {
+            MODULES.map((mod) => (
+              <div class="hero-tile flex h-full flex-col rounded-lg border border-border bg-card p-3" data-tile={mod.key}>
+                <div class="mb-2 flex items-center gap-2">
+                  <Icon name={mod.icon} class="h-4 w-4 text-muted-foreground" />
+                  <span class="truncate text-xs font-medium text-foreground">{mod.title}</span>
+                </div>
+                {/* Fila de badges siempre reservada (vacía si no hay), para que todas las tarjetas midan lo mismo */}
+                <div class="mb-2 flex min-h-[18px] flex-wrap items-start gap-1">
+                  {mod.badges.map((b) => (
+                    <Badge tone={b.tone as "blue" | "red" | "amber" | "green"} class="!px-1.5 !py-0 !text-[10px]">
+                      {b.label}
+                    </Badge>
+                  ))}
+                </div>
+                <div class="mt-auto h-6 rounded-md bg-accent/90" aria-hidden="true" />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
       {
         MODULES.map((mod) => (
-          <div class="flex h-full flex-col rounded-lg border border-border bg-card p-3">
-            <div class="mb-2 flex items-center gap-2">
-              <Icon name={mod.icon} class="h-4 w-4 text-muted-foreground" />
-              <span class="truncate text-xs font-medium text-foreground">{mod.title}</span>
+          <div class="hero-view is-hidden" data-view="detail" data-detail={mod.key}>
+            <div class="mb-2.5 flex items-baseline justify-between">
+              <h3 class="text-sm font-semibold text-foreground">{mod.title}</h3>
+              <span class="text-[11px] text-muted-foreground">{mod.sub}</span>
             </div>
-            {/* Fila de badges siempre reservada (vacía si no hay), para que todas las tarjetas midan lo mismo */}
-            <div class="mb-2 flex min-h-[18px] flex-wrap items-start gap-1">
-              {mod.badges.map((b) => (
-                <Badge tone={b.tone as "blue" | "red" | "amber" | "green"} class="!px-1.5 !py-0 !text-[10px]">
-                  {b.label}
-                </Badge>
+            <div class="overflow-hidden rounded-lg border border-border bg-card">
+              {mod.rows.map(([main, sub, status, tone], i) => (
+                <div class:list={["flex items-center justify-between gap-2 px-3 py-2", i !== mod.rows.length - 1 && "border-b border-border"]}>
+                  <div class="min-w-0">
+                    <p class="truncate text-xs font-medium text-foreground">{main}</p>
+                    <p class="truncate font-mono text-[10px] text-muted-foreground">{sub}</p>
+                  </div>
+                  <Badge tone={tone} class="!shrink-0 !px-1.5 !py-0 !text-[10px]">
+                    {status}
+                  </Badge>
+                </div>
               ))}
             </div>
-            <div class="mt-auto h-6 rounded-md bg-accent/90" aria-hidden="true"></div>
           </div>
         ))
       }
+
+      <div class="hero-cursor" data-cursor style="--cx: 40%; --cy: 45%;">
+        <span class="hero-cursor-ripple" data-ripple></span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path
+            d="M2 1.5 L2 16.5 L6 13 L8.5 18 L11 16.8 L8.6 11.7 L14 11.2 Z"
+            fill="var(--color-foreground)"
+            stroke="var(--color-background)"
+            stroke-width="1"
+          />
+        </svg>
+      </div>
     </div>
   </div>
+
+  <!-- Píldoras flotantes: contenido contextual al módulo activo -->
+  <div class="hero-pill pointer-events-none absolute -left-3 top-8 hidden rounded-lg border border-border bg-background/95 px-3 py-2 shadow-md shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2 lg:-left-4">
+    <span class="flex h-2 w-2 shrink-0 rounded-full bg-[var(--color-badge-red)]" data-pill-dot="0" aria-hidden="true"></span>
+    <span class="text-xs font-semibold text-foreground" data-pill-text="0">13 incidencias pendientes</span>
+  </div>
+  <div
+    class="hero-pill pointer-events-none absolute -right-2 top-[83%] hidden rounded-lg border border-border bg-background/95 px-3 py-2 shadow-md shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2 lg:-right-4"
+    style="animation-delay: 1.3s"
+  >
+    <span class="flex h-2 w-2 shrink-0 rounded-full bg-[var(--color-badge-amber)]" data-pill-dot="1" aria-hidden="true"></span>
+    <span class="text-xs font-semibold text-foreground" data-pill-text="1">2 préstamos vencidos</span>
+  </div>
+  <div
+    class="hero-pill pointer-events-none absolute -bottom-3 left-8 hidden rounded-lg border border-border bg-background/95 px-3 py-2 shadow-md shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2"
+    style="animation-delay: 2.4s"
+  >
+    <span class="flex h-2 w-2 shrink-0 rounded-full bg-[var(--color-badge-blue)]" data-pill-dot="2" aria-hidden="true"></span>
+    <span class="text-xs font-semibold text-foreground" data-pill-text="2">6 consumibles con stock bajo</span>
+  </div>
 </div>
+
+<script define:vars={{ pillsByModule: MODULES.map((m) => m.pills) }}>
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+  document.querySelectorAll("[data-hero-mockup]").forEach((mockup) => {
+    if (reduceMotion) return
+
+    const tiles = Array.from(mockup.querySelectorAll("[data-tile]"))
+    const modulesOrder = tiles.map((t) => t.dataset.tile)
+    const gridView = mockup.querySelector('[data-view="grid"]')
+    const detailViews = new Map(
+      Array.from(mockup.querySelectorAll("[data-detail]")).map((el) => [el.dataset.detail, el]),
+    )
+    const cursor = mockup.querySelector("[data-cursor]")
+    const ripple = mockup.querySelector("[data-ripple]")
+    const pillEls = Array.from(document.querySelectorAll("[data-pill-text]"))
+
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+    const tileCenter = (el) => {
+      const panelRect = mockup.getBoundingClientRect()
+      const r = el.getBoundingClientRect()
+      return { x: r.left - panelRect.left + r.width / 2 - 10, y: r.top - panelRect.top + r.height / 2 - 10 }
+    }
+
+    const moveCursorTo = (el) => {
+      const { x, y } = tileCenter(el)
+      cursor.style.setProperty("--cx", `${x}px`)
+      cursor.style.setProperty("--cy", `${y}px`)
+    }
+
+    const setPills = (moduleIndex) => {
+      const texts = pillsByModule[moduleIndex]
+      pillEls.forEach((el, i) => {
+        el.style.opacity = "0"
+        setTimeout(() => {
+          el.textContent = texts[i]
+          el.style.opacity = "1"
+        }, 220)
+      })
+    }
+
+    let index = 0
+
+    const cycle = async () => {
+      const mod = modulesOrder[index]
+      const tile = tiles.find((t) => t.dataset.tile === mod)
+      const detail = detailViews.get(mod)
+      if (!tile || !detail) return
+
+      await wait(1400)
+      moveCursorTo(tile)
+
+      await wait(750)
+      cursor.classList.add("is-pressing")
+      tile.classList.add("is-pressed")
+      ripple.classList.remove("is-active")
+      void ripple.offsetWidth
+      ripple.classList.add("is-active")
+
+      await wait(180)
+      cursor.classList.remove("is-pressing")
+      tile.classList.remove("is-pressed")
+
+      setPills(index)
+      gridView.classList.add("is-hidden")
+      detail.classList.remove("is-hidden")
+
+      await wait(2600)
+
+      gridView.classList.remove("is-hidden")
+      detail.classList.add("is-hidden")
+
+      index = (index + 1) % modulesOrder.length
+      cycle()
+    }
+
+    requestAnimationFrame(() => requestAnimationFrame(cycle))
+  })
+</script>
