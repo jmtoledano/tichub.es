@@ -1,0 +1,15 @@
+---
+import { UMAMI_WEBSITE_ID } from "../consts"
+---
+
+<!-- type="text/plain" + data-category impide que el navegador ejecute el
+     script hasta que vanilla-cookieconsent lo active (categoría "analytics"
+     aceptada), según su mecanismo de bloqueo de scripts. -->
+<script
+  is:inline
+  type="text/plain"
+  data-category="analytics"
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id={UMAMI_WEBSITE_ID}
+></script>

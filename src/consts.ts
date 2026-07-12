@@ -17,6 +17,11 @@ export const COMPANY = {
   rgpdEmail: "RGPD@BAUDES.ES",
 }
 
+// Umami Cloud (analítica sin cookies). El script se sirve como
+// type="text/plain" y solo se activa cuando se acepta la categoría
+// "analytics" del consentimiento — ver components/Analytics.astro.
+export const UMAMI_WEBSITE_ID = "15552168-dd40-4d0c-9517-2b594d6aac20"
+
 // Los enlaces de navegación se usan tanto en la portada como en las páginas
 // legales, así que apuntan siempre a "/#ancla" en vez de "#ancla".
 export const NAV_LINKS = [
