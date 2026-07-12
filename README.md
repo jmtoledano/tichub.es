@@ -1,6 +1,6 @@
-# TiCHub Website
+# TicHub Website
 
-Landing corporativa de TiCHub construida con Astro y Tailwind CSS v4.
+Landing corporativa de TicHub construida con Astro y Tailwind CSS v4.
 
 ## Stack
 
