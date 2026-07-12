@@ -3,35 +3,55 @@
 @theme {
   /* Fonts */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces Variable", "Fraunces", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   /* Neutrals */
   --color-background: #ffffff;
-  --color-foreground: #0f172a;
-  --color-muted: #f8fafc;
-  --color-muted-foreground: #475569;
-  --color-border: #e2e8f0;
-  --color-border-strong: #cbd5e1;
+  --color-foreground: #101a2e;
+  --color-muted: #f7f9fc;
+  --color-muted-foreground: #4a586e;
+  --color-border: #e4e9f1;
+  --color-border-strong: #c6cfdd;
   --color-card: #ffffff;
 
   /* Soft blue-tinted section background */
-  --color-surface-blue: #eff6ff;
+  --color-surface-blue: #eef4fd;
 
-  /* Institutional blue */
-  --color-accent: #2f63c6;
-  --color-accent-hover: #234f9f;
+  /* Dark "ink" surface used to create rhythm/contrast */
+  --color-ink: #0d1a30;
+  --color-ink-soft: #16263f;
+  --color-ink-foreground: #e8eefb;
+  --color-ink-muted: #9db0cd;
+  --color-ink-border: #24344f;
+
+  /* Institutional blue — slightly deeper + more saturated */
+  --color-accent: #1e56bd;
+  --color-accent-hover: #164499;
   --color-accent-foreground: #ffffff;
-  --color-accent-soft: #eff6ff;
+  --color-accent-soft: #eaf1fd;
+  --color-accent-bright: #4f8bf5;
+
+  /* Warm support accent for data highlights / details */
+  --color-gold: #c07a12;
+  --color-gold-soft: #fdf4e3;
 
   /* Badge tones */
-  --color-badge-blue: #2f63c6;
-  --color-badge-blue-bg: #eff6ff;
+  --color-badge-blue: #1e56bd;
+  --color-badge-blue-bg: #eaf1fd;
   --color-badge-red: #dc2626;
   --color-badge-red-bg: #fef2f2;
   --color-badge-amber: #d97706;
   --color-badge-amber-bg: #fffbeb;
   --color-badge-green: #16a34a;
   --color-badge-green-bg: #f0fdf4;
+
+  /* Layered shadow system for real depth */
+  --shadow-xs: 0 1px 2px rgb(16 26 46 / 0.05);
+  --shadow-sm: 0 1px 3px rgb(16 26 46 / 0.06), 0 1px 2px -1px rgb(16 26 46 / 0.08);
+  --shadow-md: 0 4px 12px -3px rgb(16 26 46 / 0.1), 0 2px 5px -3px rgb(16 26 46 / 0.08);
+  --shadow-lg: 0 18px 40px -18px rgb(16 26 46 / 0.28), 0 6px 14px -10px rgb(16 26 46 / 0.16);
+  --shadow-xl: 0 34px 70px -28px rgb(16 26 46 / 0.4), 0 12px 28px -18px rgb(16 26 46 / 0.24);
 
   /* Radius */
   --radius: 0.75rem;
@@ -46,11 +66,13 @@
 }
 
 @utility section-eyebrow {
-  @apply text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-accent;
+  @apply inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-accent;
 }
 
 @utility section-title {
-  @apply mt-2 text-balance text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  @apply mt-2.5 text-balance text-[1.75rem] font-medium leading-[1.12] tracking-[-0.01em] text-foreground sm:text-[2.1rem];
 }
 
 @utility section-copy {
@@ -229,65 +251,47 @@
     border-color 0.2s ease;
 }
 .card-lift:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-strong);
 }
 
-/* Native summary marker reset used by details-based cards. */
-.summary-reset::-webkit-details-marker {
-  display: none;
+/* Refined, tone-aware icon badge. Default tone is the institutional accent;
+   set --badge-tint / --badge-fg inline to recolor (e.g. red for problems).
+   A soft vertical tint, a hairline inner ring and a faint top sheen give the
+   icons real craft instead of a flat solid square. */
+.icon-badge {
+  --badge-tint: var(--color-accent);
+  --badge-fg: var(--color-accent);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 0.7rem;
+  color: var(--badge-fg);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--badge-tint) 16%, var(--color-background)),
+      color-mix(in oklab, var(--badge-tint) 8%, var(--color-background))
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--badge-tint) 24%, transparent),
+    inset 0 1px 0 color-mix(in oklab, white 55%, transparent),
+    var(--shadow-xs);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
-/* In desktop, feature descriptions open as floating popovers to avoid
-   changing row height while keeping native <details> behavior. */
-@media (min-width: 1024px) {
-  .feature-card {
-    position: relative;
-  }
-
-  .feature-card.is-open {
-    z-index: 20;
-  }
-
-  .feature-card.is-open-up .feature-popover {
-    top: auto;
-    bottom: calc(100% + 0.45rem);
-    transform-origin: bottom center;
-  }
-  .feature-popover {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(100% + 0.45rem);
-    margin-top: 0;
-    border: 1px solid var(--color-border-strong);
-    border-radius: 0.65rem;
-    background: var(--color-background);
-    padding: 0.75rem;
-    box-shadow: 0 12px 30px -18px rgb(15 23 42 / 0.45);
-    opacity: 0;
-    transform: translateY(0.2rem) scale(0.985);
-    transform-origin: top center;
-    pointer-events: none;
-    transition:
-      opacity 0.18s ease,
-      transform 0.2s ease;
-  }
-
-  .feature-card.is-open .feature-popover {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
-}
-
-.feature-card.is-open .feature-chevron {
-  transform: rotate(90deg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .feature-popover {
-    transition: none;
-  }
+/* Interactive cards intensify their badge on hover for a subtle response. */
+.group:hover .icon-badge {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--badge-tint) 40%, transparent),
+    inset 0 1px 0 color-mix(in oklab, white 55%, transparent),
+    var(--shadow-sm);
 }
 
 /* Entrada con fundido + desplazamiento lateral al cambiar de captura en el

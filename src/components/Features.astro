@@ -5,162 +5,161 @@ import { FEATURES } from "../consts"
 
 <section id="funcionalidades" class="scroll-mt-16 border-b border-border bg-background">
   <div class="section-wrap">
-    <div class="section-head">
-      <span class="section-eyebrow">Funcionalidades</span>
-      <h2 class="section-title">
-        Todo el ciclo de vida del material en un solo lugar
-      </h2>
-      <p class="section-copy">
-        Módulos que se conectan entre sí para que cada equipo, préstamo o incidencia deje rastro y
-        se pueda consultar cuando haga falta.
-      </p>
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div class="section-head max-w-2xl">
+        <span class="section-eyebrow">
+          <span class="h-1 w-6 rounded-full bg-accent"></span>
+          Funcionalidades
+        </span>
+        <h2 class="section-title">
+          Todo el ciclo de vida del material en un solo lugar
+        </h2>
+        <p class="section-copy">
+          Módulos que se conectan entre sí para que cada equipo, préstamo o incidencia deje rastro
+          y se pueda consultar cuando haga falta.
+        </p>
+      </div>
+
+      <!-- Carousel controls -->
+      <div class="flex items-center gap-2.5" data-carousel-controls>
+        <button
+          type="button"
+          class="carousel-btn flex h-11 w-11 items-center justify-center rounded-full border border-border-strong bg-background text-foreground shadow-[var(--shadow-xs)] transition-all hover:border-accent hover:bg-accent-soft hover:text-accent disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-border-strong disabled:hover:bg-background disabled:hover:text-foreground"
+          data-carousel-prev
+          aria-label="Anterior"
+        >
+          <Icon name="arrow" class="h-4 w-4 rotate-180" />
+        </button>
+        <button
+          type="button"
+          class="carousel-btn flex h-11 w-11 items-center justify-center rounded-full border border-border-strong bg-background text-foreground shadow-[var(--shadow-xs)] transition-all hover:border-accent hover:bg-accent-soft hover:text-accent disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-border-strong disabled:hover:bg-background disabled:hover:text-foreground"
+          data-carousel-next
+          aria-label="Siguiente"
+        >
+          <Icon name="arrow" class="h-4 w-4" />
+        </button>
+      </div>
     </div>
 
-    <div class="mt-8 grid items-start gap-3.5 sm:grid-cols-2 lg:grid-cols-4" data-features-grid>
-      {
-        FEATURES.map((feature, index) => (
-          <article class="feature-card card-lift rounded-xl border border-border bg-card p-5 hover:border-border-strong" data-feature-card>
-            <button
-              type="button"
-              class="summary-reset flex w-full items-center gap-3 text-left"
-              aria-expanded="false"
-              aria-controls={`feature-panel-${index}`}
-              data-feature-trigger
-            >
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
-                <Icon name={feature.icon} class="h-5 w-5" />
-              </span>
-              <h3 class="flex-1 text-base font-semibold text-foreground">{feature.title}</h3>
-              <Icon name="arrow" class="feature-chevron h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
-            </button>
-            <div
-              id={`feature-panel-${index}`}
-              class="feature-popover mt-3 text-[0.93rem] leading-relaxed text-muted-foreground"
-              data-feature-panel
-              hidden
-            >
-              {feature.description}
-            </div>
-          </article>
-        ))
-      }
+    <div class="relative mt-9" data-carousel>
+      <!-- Fade edges -->
+      <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent"></div>
+      <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent"></div>
+
+      <ul
+        class="feature-track flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-1"
+        data-carousel-track
+        tabindex="0"
+        aria-label="Funcionalidades de TicHub"
+      >
+        {
+          FEATURES.map((feature, index) => (
+            <li class="feature-slide snap-start">
+              <article class="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-[var(--shadow-lg)]">
+                <div class="flex items-center justify-between">
+                  <span class="icon-badge h-12 w-12">
+                    <Icon name={feature.icon} class="h-6 w-6" />
+                  </span>
+                  <span class="font-mono text-xs font-medium text-muted-foreground/60">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 class="mt-5 font-display text-xl font-medium tracking-tight text-foreground">
+                  {feature.title}
+                </h3>
+                <p class="mt-2.5 text-[0.93rem] leading-relaxed text-muted-foreground">
+                  {feature.description}
+                </p>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Progress bar -->
+      <div class="mt-7 h-1 w-full overflow-hidden rounded-full bg-border" aria-hidden="true">
+        <div class="h-full rounded-full bg-accent transition-[width,transform] duration-200 ease-out" data-carousel-progress style="width: 25%;"></div>
+      </div>
     </div>
   </div>
 </section>
 
+<style>
+  .feature-slide {
+    flex: 0 0 85%;
+  }
+
+  @media (min-width: 640px) {
+    .feature-slide {
+      flex-basis: 46%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .feature-slide {
+      flex-basis: 31%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .feature-slide {
+      flex-basis: 23.5%;
+    }
+  }
+
+  /* Slimmer, themed scrollbar */
+  .feature-track {
+    scrollbar-width: none;
+  }
+  .feature-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
 <script>
-  document.querySelectorAll<HTMLElement>("[data-features-grid]").forEach((grid) => {
-    const desktopQuery = window.matchMedia("(min-width: 1024px)")
-    const cards = Array.from(grid.querySelectorAll<HTMLElement>("[data-feature-card]"))
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-carousel-track]")
+    const prev = carousel.parentElement?.querySelector<HTMLButtonElement>("[data-carousel-prev]")
+    const next = carousel.parentElement?.querySelector<HTMLButtonElement>("[data-carousel-next]")
+    const progress = carousel.querySelector<HTMLElement>("[data-carousel-progress]")
+    if (!track) return
 
-    const updatePanelDirection = (card: HTMLElement) => {
-      const panel = card.querySelector<HTMLElement>("[data-feature-panel]")
-      if (!panel) return
-
-      if (!desktopQuery.matches) {
-        card.classList.remove("is-open-up")
-        return
-      }
-
-      const cardRect = card.getBoundingClientRect()
-      const panelHeight = panel.scrollHeight
-      const spacing = 10
-      const spaceBelow = window.innerHeight - cardRect.bottom
-      const spaceAbove = cardRect.top
-      const shouldOpenUp = panelHeight + spacing > spaceBelow && spaceAbove > spaceBelow
-
-      card.classList.toggle("is-open-up", shouldOpenUp)
+    const getStep = () => {
+      const first = track.querySelector<HTMLElement>(".feature-slide")
+      if (!first) return track.clientWidth
+      const gap = parseFloat(getComputedStyle(track).columnGap || "16") || 16
+      return first.getBoundingClientRect().width + gap
     }
 
-    const closeCard = (card: HTMLElement) => {
-      if (!card.classList.contains("is-open")) return
+    const maxScroll = () => track.scrollWidth - track.clientWidth
 
-      const trigger = card.querySelector<HTMLButtonElement>("[data-feature-trigger]")
-      const panel = card.querySelector<HTMLElement>("[data-feature-panel]")
-      if (!trigger || !panel) return
+    const update = () => {
+      const max = maxScroll()
+      const atStart = track.scrollLeft <= 1
+      const atEnd = track.scrollLeft >= max - 1
 
-      const panelHeight = panel.scrollHeight
-      panel.style.overflow = "hidden"
-      panel.style.height = `${panelHeight}px`
-      panel.style.opacity = "1"
-      panel.style.transform = "translateY(0) scale(1)"
-      panel.getBoundingClientRect()
-      panel.style.transition = "height 200ms ease, opacity 180ms ease, transform 200ms ease"
-      panel.style.height = "0px"
-      panel.style.opacity = "0"
-      panel.style.transform = "translateY(4px) scale(0.985)"
+      if (prev) prev.disabled = atStart
+      if (next) next.disabled = atEnd
 
-      const onCloseEnd = (event: TransitionEvent) => {
-        if (event.propertyName !== "height") return
-        panel.hidden = true
-        panel.style.height = ""
-        panel.style.overflow = ""
-        panel.style.opacity = ""
-        panel.style.transform = ""
-        panel.style.transition = ""
-        panel.removeEventListener("transitionend", onCloseEnd)
+      if (progress) {
+        const ratio = max > 0 ? track.scrollLeft / max : 0
+        const visibleRatio = track.clientWidth / track.scrollWidth
+        const minWidth = Math.max(visibleRatio * 100, 12)
+        const travel = 100 - minWidth
+        progress.style.width = `${minWidth}%`
+        progress.style.transform = `translateX(${(ratio * travel) / (minWidth / 100)}%)`
       }
-
-      panel.addEventListener("transitionend", onCloseEnd)
-      card.classList.remove("is-open")
-      trigger.setAttribute("aria-expanded", "false")
     }
 
-    const openCard = (card: HTMLElement) => {
-      const trigger = card.querySelector<HTMLButtonElement>("[data-feature-trigger]")
-      const panel = card.querySelector<HTMLElement>("[data-feature-panel]")
-      if (!trigger || !panel) return
-
-      updatePanelDirection(card)
-
-      cards.forEach((other) => {
-        if (other !== card) closeCard(other)
-      })
-
-      if (card.classList.contains("is-open")) {
-        closeCard(card)
-        return
-      }
-
-      panel.hidden = false
-      panel.style.overflow = "hidden"
-      panel.style.height = "0px"
-      panel.style.opacity = "0"
-      panel.style.transform = "translateY(4px) scale(0.985)"
-      panel.getBoundingClientRect()
-
-      const panelHeight = panel.scrollHeight
-      panel.style.transition = "height 220ms ease, opacity 180ms ease, transform 220ms ease"
-      panel.style.height = `${panelHeight}px`
-      panel.style.opacity = "1"
-      panel.style.transform = "translateY(0) scale(1)"
-
-      const onOpenEnd = (event: TransitionEvent) => {
-        if (event.propertyName !== "height") return
-        panel.style.height = ""
-        panel.style.overflow = ""
-        panel.style.transition = ""
-        panel.removeEventListener("transitionend", onOpenEnd)
-      }
-
-      panel.addEventListener("transitionend", onOpenEnd)
-      card.classList.add("is-open")
-      trigger.setAttribute("aria-expanded", "true")
-    }
-
-    const refreshOpenCardsDirection = () => {
-      cards.forEach((card) => {
-        if (card.classList.contains("is-open")) updatePanelDirection(card)
-      })
-    }
-
-    cards.forEach((card) => {
-      const trigger = card.querySelector<HTMLButtonElement>("[data-feature-trigger]")
-      trigger?.addEventListener("click", () => openCard(card))
+    prev?.addEventListener("click", () => {
+      track.scrollBy({ left: -getStep(), behavior: "smooth" })
+    })
+    next?.addEventListener("click", () => {
+      track.scrollBy({ left: getStep(), behavior: "smooth" })
     })
 
-    window.addEventListener("resize", refreshOpenCardsDirection)
-    window.addEventListener("scroll", refreshOpenCardsDirection, { passive: true })
-    desktopQuery.addEventListener("change", refreshOpenCardsDirection)
+    track.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("resize", update)
+    update()
   })
 </script>

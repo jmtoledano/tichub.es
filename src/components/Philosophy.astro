@@ -3,29 +3,107 @@ import Icon from "./Icon.astro"
 import { PHILOSOPHY } from "../consts"
 ---
 
-<section class="border-b border-border bg-[var(--color-surface-blue)]">
-  <div class="section-wrap grid gap-10 lg:grid-cols-2 lg:items-center">
-    <div>
-      <h2 class="section-title mt-0">
+<section class="relative overflow-hidden border-y border-[var(--color-ink-border)] bg-[var(--color-ink)] text-[var(--color-ink-foreground)]">
+  <!-- Ambient bloom for depth -->
+  <div
+    class="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full opacity-40 blur-3xl"
+    style="background: radial-gradient(circle, var(--color-accent-bright) 0%, transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="section-wrap relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <div class="lg:sticky lg:top-24">
+      <span class="section-eyebrow text-[var(--color-accent-bright)]">
+        <span class="h-1 w-6 rounded-full bg-[var(--color-accent-bright)]"></span>
+        Filosofía
+      </span>
+      <h2 class="section-title mt-2.5 text-[var(--color-ink-foreground)]">
         Diseñado para centros reales, no para departamentos gigantes
       </h2>
-      <p class="section-copy">
+      <p class="section-copy text-[var(--color-ink-muted)]">
         TicHub asume que quien lo usa tiene poco tiempo y muchas otras responsabilidades. Por eso
         prioriza la claridad y la trazabilidad sin obligar a montar procesos complejos.
       </p>
     </div>
 
-    <ul class="grid gap-2.5">
+    <ol class="philosophy-list grid gap-px overflow-hidden rounded-xl border border-[var(--color-ink-border)] bg-[var(--color-ink-border)]" data-philosophy>
       {
-        PHILOSOPHY.map((point) => (
-          <li class="flex items-start gap-3 rounded-lg border border-border/80 bg-card p-3.5">
-            <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent-soft text-accent">
+        PHILOSOPHY.map((point, index) => (
+          <li
+            class="philosophy-item flex items-start gap-4 bg-[var(--color-ink)] px-5 py-5"
+            data-philosophy-item
+          >
+            <span class="mt-0.5 font-mono text-xs font-medium tabular-nums text-[var(--color-accent-bright)]">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[color-mix(in_oklab,var(--color-accent-bright)_18%,transparent)] text-[var(--color-accent-bright)]">
               <Icon name="check" class="h-4 w-4" />
             </span>
-            <span class="text-sm leading-relaxed text-foreground">{point}</span>
+            <span class="text-[0.98rem] leading-relaxed text-[var(--color-ink-foreground)]">{point}</span>
           </li>
         ))
       }
-    </ul>
+    </ol>
   </div>
 </section>
+
+<style>
+  .philosophy-item {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(2px);
+    transition:
+      opacity 640ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 640ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 640ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .philosophy-item.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .philosophy-item {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const items = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-philosophy-item]"),
+  )
+
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("is-revealed"))
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Reveal in reading order; group cascade of 3 for a "credits" rhythm.
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              (a.target as HTMLElement).offsetTop -
+              (b.target as HTMLElement).offsetTop,
+          )
+          .forEach((entry, i) => {
+            const item = entry.target as HTMLElement
+            item.style.setProperty("--reveal-delay", `${(i % 3) * 90}ms`)
+            item.classList.add("is-revealed")
+            observer.unobserve(item)
+          })
+      },
+      { threshold: 0.35, rootMargin: "0px 0px -12% 0px" },
+    )
+
+    items.forEach((item) => observer.observe(item))
+  }
+</script>
