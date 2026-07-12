@@ -6,35 +6,33 @@ import DashboardMockup from "./DashboardMockup.astro";
 <section class="relative overflow-hidden border-b border-border bg-background">
   <div class="pointer-events-none absolute inset-0 bg-grid opacity-60"></div>
 
-  <div
-    class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24"
-  >
+  <div class="section-wrap relative grid items-center gap-10 lg:grid-cols-2">
     <div>
       <span
-        class="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"
+        class="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
       >
         <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
         Plataforma para centros educativos
       </span>
 
       <h1
-        class="mt-5 text-balance text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl"
+        class="mt-4 max-w-xl text-balance text-3xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-5xl"
       >
         Todo el material técnico de tu centro, bajo control
       </h1>
 
       <p
-        class="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
+        class="mt-4 max-w-xl text-pretty text-[1.02rem] leading-relaxed text-muted-foreground sm:text-lg"
       >
         TicHub centraliza el inventario, los préstamos, las incidencias, los
         consumibles, las compras y la documentación técnica de un centro
         educativo en una plataforma clara, trazable y fácil de usar.
       </p>
 
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
         <a
           href="#demo"
-          class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground shadow-lg shadow-accent/25 transition-all hover:bg-[var(--color-accent-hover)] hover:shadow-xl hover:shadow-accent/30"
+          class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition-colors hover:bg-[var(--color-accent-hover)]"
         >
           Solicitar demo
           <Icon name="arrow" class="h-4 w-4" />
@@ -48,7 +46,7 @@ import DashboardMockup from "./DashboardMockup.astro";
       </div>
     </div>
 
-    <div class="relative lg:pl-4">
+    <div class="relative lg:pl-2">
       <!-- Soft blue glow -->
       <div
         class="pointer-events-none absolute -inset-6 -z-10 hero-glow"
@@ -60,7 +58,7 @@ import DashboardMockup from "./DashboardMockup.astro";
 
       <!-- Floating status pills -->
       <div
-        class="hero-pill pointer-events-none absolute -left-3 top-8 hidden rounded-xl border border-border bg-background/95 px-3 py-2 shadow-lg shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2 lg:-left-6"
+        class="hero-pill pointer-events-none absolute -left-3 top-8 hidden rounded-lg border border-border bg-background/95 px-3 py-2 shadow-md shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2 lg:-left-4"
       >
         <span
           class="flex h-2 w-2 rounded-full bg-[var(--color-badge-red)]"
@@ -70,7 +68,7 @@ import DashboardMockup from "./DashboardMockup.astro";
         >
       </div>
       <div
-        class="hero-pill pointer-events-none absolute -right-3 top-[84%] hidden rounded-xl border border-border bg-background/95 px-3 py-2 shadow-lg shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2 lg:-right-6"
+        class="hero-pill pointer-events-none absolute -right-2 top-[83%] hidden rounded-lg border border-border bg-background/95 px-3 py-2 shadow-md shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2 lg:-right-4"
         style="animation-delay: 1.3s"
       >
         <span
@@ -81,7 +79,7 @@ import DashboardMockup from "./DashboardMockup.astro";
         >
       </div>
       <div
-        class="hero-pill pointer-events-none absolute -bottom-4 left-10 hidden rounded-xl border border-border bg-background/95 px-3 py-2 shadow-lg shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2"
+        class="hero-pill pointer-events-none absolute -bottom-3 left-8 hidden rounded-lg border border-border bg-background/95 px-3 py-2 shadow-md shadow-slate-900/10 backdrop-blur-sm sm:flex sm:items-center sm:gap-2"
         style="animation-delay: 2.4s"
       >
         <span

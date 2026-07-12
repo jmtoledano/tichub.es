@@ -4,21 +4,21 @@ import { PHILOSOPHY } from "../consts"
 ---
 
 <section class="border-b border-border bg-[var(--color-surface-blue)]">
-  <div class="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24">
+  <div class="section-wrap grid gap-10 lg:grid-cols-2 lg:items-center">
     <div>
-      <h2 class="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+      <h2 class="section-title mt-0">
         Diseñado para centros reales, no para departamentos gigantes
       </h2>
-      <p class="mt-4 text-pretty leading-relaxed text-muted-foreground">
+      <p class="section-copy">
         TicHub asume que quien lo usa tiene poco tiempo y muchas otras responsabilidades. Por eso
         prioriza la claridad y la trazabilidad sin obligar a montar procesos complejos.
       </p>
     </div>
 
-    <ul class="grid gap-3">
+    <ul class="grid gap-2.5">
       {
         PHILOSOPHY.map((point) => (
-          <li class="flex items-start gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm">
+          <li class="flex items-start gap-3 rounded-lg border border-border/80 bg-card p-3.5">
             <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent-soft text-accent">
               <Icon name="check" class="h-4 w-4" />
             </span>

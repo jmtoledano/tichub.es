@@ -37,6 +37,26 @@
   --radius: 0.75rem;
 }
 
+@utility section-wrap {
+  @apply mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-18;
+}
+
+@utility section-head {
+  @apply max-w-2xl;
+}
+
+@utility section-eyebrow {
+  @apply text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-accent;
+}
+
+@utility section-title {
+  @apply mt-2 text-balance text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl;
+}
+
+@utility section-copy {
+  @apply mt-3 text-pretty text-[0.97rem] leading-relaxed text-muted-foreground;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -112,6 +132,64 @@
 }
 .card-lift:hover {
   transform: translateY(-2px);
+}
+
+/* Native summary marker reset used by details-based cards. */
+.summary-reset::-webkit-details-marker {
+  display: none;
+}
+
+/* In desktop, feature descriptions open as floating popovers to avoid
+   changing row height while keeping native <details> behavior. */
+@media (min-width: 1024px) {
+  .feature-card {
+    position: relative;
+  }
+
+  .feature-card.is-open {
+    z-index: 20;
+  }
+
+  .feature-card.is-open-up .feature-popover {
+    top: auto;
+    bottom: calc(100% + 0.45rem);
+    transform-origin: bottom center;
+  }
+  .feature-popover {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 0.45rem);
+    margin-top: 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 0.65rem;
+    background: var(--color-background);
+    padding: 0.75rem;
+    box-shadow: 0 12px 30px -18px rgb(15 23 42 / 0.45);
+    opacity: 0;
+    transform: translateY(0.2rem) scale(0.985);
+    transform-origin: top center;
+    pointer-events: none;
+    transition:
+      opacity 0.18s ease,
+      transform 0.2s ease;
+  }
+
+  .feature-card.is-open .feature-popover {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+}
+
+.feature-card.is-open .feature-chevron {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-popover {
+    transition: none;
+  }
 }
 
 /* Entrada con fundido + desplazamiento lateral al cambiar de captura en el
