@@ -7,10 +7,7 @@ import { FEATURES } from "../consts"
   <div class="section-wrap">
     <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
       <div class="section-head max-w-2xl">
-        <span class="section-eyebrow">
-          <span class="h-1 w-6 rounded-full bg-accent"></span>
-          Funcionalidades
-        </span>
+        <span class="section-eyebrow">Funcionalidades</span>
         <h2 class="section-title">
           Todo el ciclo de vida del material en un solo lugar
         </h2>
@@ -53,17 +50,12 @@ import { FEATURES } from "../consts"
         aria-label="Funcionalidades de TicHub"
       >
         {
-          FEATURES.map((feature, index) => (
+          FEATURES.map((feature) => (
             <li class="feature-slide snap-start">
               <article class="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-[var(--shadow-lg)]">
-                <div class="flex items-center justify-between">
-                  <span class="icon-badge h-12 w-12">
-                    <Icon name={feature.icon} class="h-6 w-6" />
-                  </span>
-                  <span class="font-mono text-xs font-medium text-muted-foreground/60">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
+                <span class="icon-badge h-12 w-12">
+                  <Icon name={feature.icon} class="h-6 w-6" />
+                </span>
                 <h3 class="mt-5 font-display text-xl font-medium tracking-tight text-foreground">
                   {feature.title}
                 </h3>

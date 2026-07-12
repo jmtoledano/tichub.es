@@ -1,6 +1,11 @@
 ---
 import Icon from "./Icon.astro"
 import { PHILOSOPHY } from "../consts"
+
+const PAGE_SIZE = 3
+const pages = Array.from({ length: Math.ceil(PHILOSOPHY.length / PAGE_SIZE) }, (_, i) =>
+  PHILOSOPHY.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE),
+)
 ---
 
 <section class="relative overflow-hidden border-y border-[var(--color-ink-border)] bg-[var(--color-ink)] text-[var(--color-ink-foreground)]">
@@ -12,12 +17,9 @@ import { PHILOSOPHY } from "../consts"
   >
   </div>
 
-  <div class="section-wrap relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-    <div class="lg:sticky lg:top-24">
-      <span class="section-eyebrow text-[var(--color-accent-bright)]">
-        <span class="h-1 w-6 rounded-full bg-[var(--color-accent-bright)]"></span>
-        Filosofía
-      </span>
+  <div class="section-wrap relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+    <div>
+      <span class="section-eyebrow text-[var(--color-accent-bright)]">Filosofía</span>
       <h2 class="section-title mt-2.5 text-[var(--color-ink-foreground)]">
         Diseñado para centros reales, no para departamentos gigantes
       </h2>
@@ -27,83 +29,77 @@ import { PHILOSOPHY } from "../consts"
       </p>
     </div>
 
-    <ol class="philosophy-list grid gap-px overflow-hidden rounded-xl border border-[var(--color-ink-border)] bg-[var(--color-ink-border)]" data-philosophy>
+    <!-- Muestra 3 puntos a la vez y rota automáticamente al siguiente grupo de 3
+         (en vez de apilar los 6). Ver el <script> más abajo. -->
+    <div class="relative" data-philosophy>
       {
-        PHILOSOPHY.map((point, index) => (
-          <li
-            class="philosophy-item flex items-start gap-4 bg-[var(--color-ink)] px-5 py-5"
-            data-philosophy-item
+        pages.map((page, pageIndex) => (
+          <ol
+            class="philosophy-page grid gap-px overflow-hidden rounded-xl border border-[var(--color-ink-border)] bg-[var(--color-ink-border)]"
+            data-philosophy-page={pageIndex}
           >
-            <span class="mt-0.5 font-mono text-xs font-medium tabular-nums text-[var(--color-accent-bright)]">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[color-mix(in_oklab,var(--color-accent-bright)_18%,transparent)] text-[var(--color-accent-bright)]">
-              <Icon name="check" class="h-4 w-4" />
-            </span>
-            <span class="text-[0.98rem] leading-relaxed text-[var(--color-ink-foreground)]">{point}</span>
-          </li>
+            {page.map((point) => (
+              <li class="flex items-start gap-4 bg-[var(--color-ink)] px-5 py-5">
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[color-mix(in_oklab,var(--color-accent-bright)_18%,transparent)] text-[var(--color-accent-bright)]">
+                  <Icon name="check" class="h-4 w-4" />
+                </span>
+                <span class="text-[0.98rem] leading-relaxed text-[var(--color-ink-foreground)]">{point}</span>
+              </li>
+            ))}
+          </ol>
         ))
       }
-    </ol>
+    </div>
   </div>
 </section>
 
 <style>
-  .philosophy-item {
-    opacity: 0;
-    transform: translateY(22px);
-    filter: blur(2px);
+  .philosophy-page {
     transition:
-      opacity 640ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 640ms cubic-bezier(0.22, 1, 0.36, 1),
-      filter 640ms cubic-bezier(0.22, 1, 0.36, 1);
-    transition-delay: var(--reveal-delay, 0ms);
+      opacity 0.5s ease,
+      transform 0.5s ease;
   }
-
-  .philosophy-item.is-revealed {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+  .philosophy-page.is-absolute {
+    position: absolute;
+    inset: 0;
   }
-
+  .philosophy-page.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(6px);
+  }
   @media (prefers-reduced-motion: reduce) {
-    .philosophy-item {
-      opacity: 1;
-      transform: none;
-      filter: none;
+    .philosophy-page {
       transition: none;
     }
   }
 </style>
 
 <script>
-  const items = Array.from(
-    document.querySelectorAll<HTMLElement>("[data-philosophy-item]"),
-  )
+  document.querySelectorAll<HTMLElement>("[data-philosophy]").forEach((container) => {
+    const pages = Array.from(container.querySelectorAll<HTMLElement>("[data-philosophy-page]"))
+    if (pages.length <= 1) return
 
-  if (!("IntersectionObserver" in window)) {
-    items.forEach((item) => item.classList.add("is-revealed"))
-  } else {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Reveal in reading order; group cascade of 3 for a "credits" rhythm.
-        entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              (a.target as HTMLElement).offsetTop -
-              (b.target as HTMLElement).offsetTop,
-          )
-          .forEach((entry, i) => {
-            const item = entry.target as HTMLElement
-            item.style.setProperty("--reveal-delay", `${(i % 3) * 90}ms`)
-            item.classList.add("is-revealed")
-            observer.unobserve(item)
-          })
-      },
-      { threshold: 0.35, rootMargin: "0px 0px -12% 0px" },
-    )
+    // Con el movimiento reducido activado, se dejan todas las páginas apiladas y
+    // estáticas (sin rotación) para no ocultar contenido detrás de un temporizador.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
 
-    items.forEach((item) => observer.observe(item))
-  }
+    container.style.position = "relative"
+    const maxHeight = Math.max(...pages.map((p) => p.getBoundingClientRect().height))
+    container.style.height = `${maxHeight}px`
+
+    pages.forEach((page, i) => {
+      page.classList.add("is-absolute")
+      if (i !== 0) page.classList.add("is-hidden")
+    })
+
+    let index = 0
+    setInterval(() => {
+      const current = pages[index]
+      index = (index + 1) % pages.length
+      const next = pages[index]
+      current.classList.add("is-hidden")
+      next.classList.remove("is-hidden")
+    }, 4200)
+  })
 </script>
