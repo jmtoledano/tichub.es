@@ -114,6 +114,19 @@
   transform: translateY(-2px);
 }
 
+/* Entrada con fundido + desplazamiento lateral al cambiar de captura en el
+   carrusel de "Así se ve TicHub por dentro". */
+.carousel-slide {
+  transition:
+    opacity 0.32s ease,
+    transform 0.32s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-slide {
+    transition: none;
+  }
+}
+
 /* Tipografía mínima para las páginas legales (sin plugin de prose). */
 .legal-content h2 {
   margin-top: 2rem;
