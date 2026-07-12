@@ -168,8 +168,24 @@ export const FEATURES = [
   },
   {
     title: "Copias de seguridad",
-    description: "Copias diarias cifradas y deduplicadas, con retención de hasta un año sin disparar el espacio ocupado.",
+    description:
+      "Copias diarias cifradas y deduplicadas, con retención de hasta un año y restauración con doble confirmación cuando hace falta.",
     icon: "database",
+  },
+  {
+    title: "Etiquetas imprimibles",
+    description: "Códigos de barras en hojas A4 configurables, con impresión individual o masiva desde el propio inventario.",
+    icon: "tag",
+  },
+  {
+    title: "Libro de inventario oficial",
+    description: "Exportación en Excel y PDF con altas, bajas y su motivo, lista para firmar y presentar ante la administración.",
+    icon: "spreadsheet",
+  },
+  {
+    title: "Resguardo de préstamo",
+    description: "Justificante en PDF para firmar en la entrega, con el material prestado, los consumibles y hueco para material adicional.",
+    icon: "receipt",
   },
 ]
 
