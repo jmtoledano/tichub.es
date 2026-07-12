@@ -6,11 +6,30 @@ export const SITE = {
   url: "https://tichub.es",
 }
 
+// Datos del titular del sitio (art. 10 LSSI), usados en Aviso Legal, Política
+// de Privacidad y Política de Cookies.
+export const COMPANY = {
+  legalName: "BAUDES S.L.",
+  cif: "B86975372",
+  address: "Calle Castilla la Nueva, 37, 3º B, Fuenlabrada (Madrid)",
+  registry:
+    "Registro Mercantil de Madrid, Tomo 32158, Folio 61, Sección 8, Hoja M-578687, Inscripción 1",
+  rgpdEmail: "RGPD@BAUDES.ES",
+}
+
+// Los enlaces de navegación se usan tanto en la portada como en las páginas
+// legales, así que apuntan siempre a "/#ancla" en vez de "#ancla".
 export const NAV_LINKS = [
-  { label: "Funcionalidades", href: "#funcionalidades" },
-  { label: "Capturas", href: "#capturas" },
-  { label: "Precios", href: "#precios" },
-  { label: "Documentación", href: "#documentacion" },
+  { label: "Funcionalidades", href: "/#funcionalidades" },
+  { label: "Capturas", href: "/#capturas" },
+  { label: "Precios", href: "/#precios" },
+  { label: "Documentación", href: "/#documentacion" },
+]
+
+export const LEGAL_LINKS = [
+  { label: "Aviso legal", href: "/aviso-legal" },
+  { label: "Política de privacidad", href: "/politica-privacidad" },
+  { label: "Política de cookies", href: "/politica-cookies" },
 ]
 
 // Content for the "Capturas" section — each title maps to a hand-built mockup

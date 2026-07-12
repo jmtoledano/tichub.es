@@ -1,12 +1,13 @@
 ---
 import Wordmark from "./Wordmark.astro"
+import { LEGAL_LINKS } from "../consts"
 
 const footerLinks = [
-  { label: "Funcionalidades", href: "#funcionalidades" },
-  { label: "Capturas", href: "#capturas" },
-  { label: "Precios", href: "#precios" },
-  { label: "Documentación", href: "#documentacion" },
-  { label: "Solicitar demo", href: "#demo" },
+  { label: "Funcionalidades", href: "/#funcionalidades" },
+  { label: "Capturas", href: "/#capturas" },
+  { label: "Precios", href: "/#precios" },
+  { label: "Documentación", href: "/#documentacion" },
+  { label: "Solicitar demo", href: "/#demo" },
   { label: "Contacto técnico", href: "mailto:contacto@tichub.es" },
 ]
 ---
@@ -35,9 +36,35 @@ const footerLinks = [
       </nav>
     </div>
 
-    <div class="mt-10 flex flex-col gap-2 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-      <p class="text-xs text-muted-foreground">© 2026 TicHub · tichub.es</p>
-      <p class="text-xs text-muted-foreground">Alojamiento gestionado sobre nuestra infraestructura.</p>
+    <div class="mt-10 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        {
+          LEGAL_LINKS.map((link) => (
+            <a
+              href={link.href}
+              class="text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <button
+          type="button"
+          id="cc-preferences-trigger"
+          class="text-xs text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
+        >
+          Preferencias de cookies
+        </button>
+      </div>
+      <p class="text-xs text-muted-foreground">© 2026 TicHub · tichub.es · Alojamiento gestionado sobre nuestra infraestructura.</p>
     </div>
   </div>
 </footer>
+
+<script>
+  import * as CookieConsent from "vanilla-cookieconsent"
+
+  document.getElementById("cc-preferences-trigger")?.addEventListener("click", () => {
+    CookieConsent.showPreferences()
+  })
+</script>

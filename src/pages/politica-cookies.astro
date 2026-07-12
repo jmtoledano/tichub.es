@@ -1,0 +1,47 @@
+---
+import LegalPage from "../components/LegalPage.astro"
+import { COMPANY, SITE } from "../consts"
+---
+
+<LegalPage title="Política de cookies" updated="julio de 2026">
+  <h2>¿Qué son las cookies?</h2>
+  <p>
+    Las cookies son pequeños archivos que un sitio web guarda en tu navegador para recordar
+    información sobre tu visita, como tus preferencias o el consentimiento que has dado.
+  </p>
+
+  <h2>¿Qué cookies usa este sitio?</h2>
+  <p>
+    El sitio web {SITE.url} utiliza únicamente una cookie técnica necesaria para recordar tu
+    decisión sobre el uso de cookies, de forma que no tengas que repetirla en cada visita. Esta
+    cookie no requiere tu consentimiento porque es imprescindible para el funcionamiento del propio
+    aviso de cookies.
+  </p>
+  <p>
+    Actualmente no utilizamos cookies de analítica, publicidad ni de terceros. El panel de
+    preferencias incluye una categoría de <strong>analítica</strong>, hoy desactivada, que solo se
+    activará si en el futuro incorporamos una herramienta de medición de audiencia — y únicamente
+    si das tu consentimiento explícito para ello.
+  </p>
+
+  <h2>¿Cómo gestionar tus preferencias?</h2>
+  <p>
+    Puedes cambiar tu decisión en cualquier momento desde el enlace <strong>"Preferencias de
+    cookies"</strong> situado en el pie de página de cada página del sitio. También puedes
+    configurar o bloquear las cookies directamente desde los ajustes de tu navegador; ten en cuenta
+    que bloquear la cookie técnica hará que el aviso de cookies vuelva a aparecer en cada visita.
+  </p>
+
+  <h2>Responsable</h2>
+  <p>
+    <strong>{COMPANY.legalName}</strong>, C.I.F. {COMPANY.cif}, es responsable del uso de cookies en
+    este sitio web. Para cualquier consulta, escríbenos a
+    <a href={`mailto:${COMPANY.rgpdEmail}`}>{COMPANY.rgpdEmail}</a>.
+  </p>
+
+  <h2>Cambios en esta política</h2>
+  <p>
+    Podemos actualizar esta política de cookies para reflejar cambios en las cookies que
+    utilizamos o por motivos legales o normativos. Te recomendamos revisarla periódicamente.
+  </p>
+</LegalPage>

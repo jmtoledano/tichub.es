@@ -113,3 +113,31 @@
 .card-lift:hover {
   transform: translateY(-2px);
 }
+
+/* Tipografía mínima para las páginas legales (sin plugin de prose). */
+.legal-content h2 {
+  margin-top: 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+.legal-content p,
+.legal-content li {
+  font-size: 0.9375rem;
+}
+.legal-content ul {
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+}
+.legal-content a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal-content strong {
+  color: var(--color-foreground);
+  font-weight: 600;
+}

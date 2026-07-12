@@ -1,0 +1,52 @@
+---
+import LegalPage from "../components/LegalPage.astro"
+import { COMPANY, SITE } from "../consts"
+---
+
+<LegalPage title="Aviso legal" updated="julio de 2026">
+  <p>
+    En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11
+    de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE),
+    se facilitan a continuación los siguientes datos: el sitio web {SITE.url} es titularidad de
+    <strong>{COMPANY.legalName}</strong>, con domicilio en {COMPANY.address}, C.I.F. {COMPANY.cif},
+    inscrita en el {COMPANY.registry}. Correo electrónico de contacto:
+    <a href={`mailto:${COMPANY.rgpdEmail}`}>{COMPANY.rgpdEmail}</a>.
+  </p>
+
+  <h2>Objeto</h2>
+  <p>
+    Este aviso legal regula el uso del sitio web {SITE.url} (en adelante, "el sitio web"), cuya
+    finalidad es informar sobre TicHub, una plataforma de gestión de material para centros
+    educativos, y facilitar el contacto de personas y organizaciones interesadas.
+  </p>
+
+  <h2>Condiciones de acceso y uso</h2>
+  <p>
+    El acceso al sitio web es gratuito y no requiere registro previo. El usuario se compromete a
+    hacer un uso adecuado y lícito del sitio web, de conformidad con la legislación aplicable, la
+    buena fe y el orden público, absteniéndose de realizar cualquier acción que pudiera dañar,
+    inutilizar o sobrecargar el sitio, o impedir su normal utilización por parte de terceros.
+  </p>
+
+  <h2>Propiedad intelectual e industrial</h2>
+  <p>
+    Los contenidos del sitio web (textos, imágenes, marcas, logotipos, diseño y código fuente) son
+    propiedad de {COMPANY.legalName} o de terceros que han autorizado su uso, y están protegidos
+    por la normativa de propiedad intelectual e industrial. Queda prohibida su reproducción,
+    distribución o transformación sin autorización expresa del titular.
+  </p>
+
+  <h2>Exclusión de responsabilidad</h2>
+  <p>
+    {COMPANY.legalName} no garantiza la disponibilidad y continuidad permanente del sitio web, y no
+    se responsabiliza de los daños que pudieran derivarse de la falta de disponibilidad o de
+    interrupciones del servicio por causas ajenas a su control.
+  </p>
+
+  <h2>Legislación aplicable y jurisdicción</h2>
+  <p>
+    Las presentes condiciones se rigen por la legislación española. Para cualquier controversia
+    derivada del uso del sitio web, las partes se someten a los juzgados y tribunales de Madrid,
+    salvo que la normativa aplicable disponga otra cosa.
+  </p>
+</LegalPage>

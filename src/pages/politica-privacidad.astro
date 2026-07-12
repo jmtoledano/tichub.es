@@ -1,0 +1,57 @@
+---
+import LegalPage from "../components/LegalPage.astro"
+import { COMPANY, SITE } from "../consts"
+---
+
+<LegalPage title="Política de privacidad" updated="julio de 2026">
+  <h2>Responsable del tratamiento</h2>
+  <p>
+    <strong>{COMPANY.legalName}</strong>, C.I.F. {COMPANY.cif}, con domicilio en {COMPANY.address},
+    inscrita en el {COMPANY.registry}, es responsable del tratamiento de los datos personales que
+    se recaben a través del sitio web {SITE.url}. Puedes contactar con nosotros en materia de
+    protección de datos en <a href={`mailto:${COMPANY.rgpdEmail}`}>{COMPANY.rgpdEmail}</a>.
+  </p>
+
+  <h2>¿Qué datos tratamos y con qué finalidad?</h2>
+  <p>
+    Este sitio web no dispone de formularios propios: las solicitudes de demostración o de
+    contacto se envían directamente por correo electrónico a través de los enlaces habilitados en
+    la web. Los datos que nos facilites por esa vía (nombre, correo electrónico y el contenido de
+    tu mensaje) se tratan únicamente para responder a tu solicitud y, en su caso, gestionar la
+    relación comercial que pudiera derivarse.
+  </p>
+  <p>
+    Si aceptas las cookies de analítica desde el panel de preferencias, también trataremos datos
+    de navegación agregados y anónimos sobre el uso del sitio web. Puedes consultar el detalle en
+    la <a href="/politica-cookies">política de cookies</a>.
+  </p>
+
+  <h2>Legitimación</h2>
+  <p>
+    La base legal para el tratamiento de tus datos es tu consentimiento, manifestado al enviarnos
+    voluntariamente un correo electrónico o al aceptar las cookies de analítica.
+  </p>
+
+  <h2>¿Con quién compartimos tus datos?</h2>
+  <p>
+    No cedemos tus datos a terceros, salvo obligación legal. Los proveedores que puedan tener
+    acceso a datos técnicos (por ejemplo, el proveedor de alojamiento del sitio web) actúan como
+    encargados del tratamiento bajo contrato, conforme al artículo 28 del RGPD.
+  </p>
+
+  <h2>Plazo de conservación</h2>
+  <p>
+    Conservamos los datos de contacto durante el tiempo necesario para atender tu solicitud y,
+    posteriormente, durante los plazos legales de prescripción de responsabilidades aplicables.
+  </p>
+
+  <h2>Tus derechos</h2>
+  <p>
+    Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión,
+    oposición, limitación del tratamiento y portabilidad de los datos escribiendo a
+    <a href={`mailto:${COMPANY.rgpdEmail}`}>{COMPANY.rgpdEmail}</a>, indicando el derecho que
+    quieres ejercer y adjuntando copia de un documento que acredite tu identidad. Si consideras que
+    el tratamiento no se ajusta a la normativa vigente, también puedes presentar una reclamación
+    ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).
+  </p>
+</LegalPage>
