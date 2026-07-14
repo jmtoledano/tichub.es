@@ -334,3 +334,33 @@
   color: var(--color-foreground);
   font-weight: 600;
 }
+
+/* Tabla de detalle de cookies. La envoltura permite scroll horizontal en móvil
+   sin que la página entera se desborde. Los bordes se declaran explícitamente
+   porque el reset de Tailwind los quita. */
+.legal-table-wrap {
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+.legal-content table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.legal-content th,
+.legal-content td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+.legal-content thead th {
+  background: var(--color-muted);
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+.legal-content code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}

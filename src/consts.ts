@@ -14,7 +14,7 @@ export const COMPANY = {
   address: "Calle Castilla la Nueva, 37, 3º B, Fuenlabrada (Madrid)",
   registry:
     "Registro Mercantil de Madrid, Tomo 32158, Folio 61, Sección 8, Hoja M-578687, Inscripción 1",
-  rgpdEmail: "RGPD@BAUDES.ES",
+  rgpdEmail: "lopd@baudes.es",
 }
 
 // Umami Cloud (analítica sin cookies). El script se sirve como
