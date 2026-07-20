@@ -13,7 +13,9 @@ export interface Env {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const FROM_ADDRESS = "noreply@tichub.es"
-const TO_ADDRESS = "contacto@tichub.es"
+// Tiene que coincidir con destination_address del binding EMAIL en wrangler.toml
+// (la dirección verificada en Email Routing, no el alias contacto@tichub.es).
+const TO_ADDRESS = "jose@baudes.es"
 
 function jsonResponse(body: Record<string, unknown>, status: number) {
   return new Response(JSON.stringify(body), {
