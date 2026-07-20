@@ -3,6 +3,9 @@ main = "src/index.ts"
 compatibility_date = "2024-09-23"
 # Necesario porque "mimetext" usa internamente módulos de Node ("path", "node:os").
 compatibility_flags = ["nodejs_compat"]
+# Sin URL pública: solo se llama desde tichub.es vía Service Binding (EMAIL_WORKER),
+# nunca directamente por internet.
+workers_dev = false
 
 # Envía correos a través de Cloudflare Email Routing (ya activo para tichub.es).
 # El binding exige la dirección VERIFICADA de Email Routing (la bandeja real a la
