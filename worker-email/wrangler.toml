@@ -1,0 +1,12 @@
+name = "tichub-email-worker"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+# Envía correos a través de Cloudflare Email Routing (ya activo para tichub.es).
+# "contacto@tichub.es" debe ser un destino verificado en Email Routing — lo es,
+# porque ya reenvías el correo de esa dirección desde ahí.
+# Este binding solo existe para Workers independientes, no para Pages Functions
+# — por eso este envío vive en su propio Worker en vez de en functions/api/demo.ts.
+[[send_email]]
+name = "EMAIL"
+destination_address = "contacto@tichub.es"
