@@ -4,34 +4,432 @@ import Icon from "./Icon.astro"
 
 <section id="solicitar-demo" class="scroll-mt-16 border-b border-border bg-background">
   <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-    <div class="relative overflow-hidden rounded-2xl bg-accent px-6 py-14 text-center shadow-xl shadow-accent/25 sm:px-12 sm:py-16">
-      <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10" aria-hidden="true"></div>
-      <div class="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-white/10" aria-hidden="true"></div>
+    <div
+      class="relative overflow-hidden rounded-2xl bg-accent px-6 py-14 text-center shadow-xl shadow-accent/25 sm:px-12 sm:py-16"
+      data-cta-box
+    >
+      <div class="pointer-events-none absolute inset-0" data-pieces-layer aria-hidden="true"></div>
+      <div
+        class="pointer-events-none absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/70 opacity-0"
+        data-burst-ring
+      >
+      </div>
 
-      <div class="relative">
-        <h2 class="mx-auto max-w-2xl text-balance font-display text-[2rem] font-medium leading-[1.1] tracking-[-0.01em] text-accent-foreground sm:text-[2.5rem]">
-          ¿Quieres ver TicHub funcionando con datos de ejemplo?
-        </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-pretty leading-relaxed text-accent-foreground/85">
-          Solicita una demo y recorre el ciclo completo: inventario, préstamo, devolución,
-          incidencia, consumo de material y auditoría.
-        </p>
-        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="mailto:contacto@tichub.es?subject=Solicitud%20de%20demo%20TicHub"
-            class="inline-flex items-center gap-2 rounded-lg bg-background px-6 py-3 text-sm font-semibold text-accent shadow-lg shadow-slate-900/10 transition-colors hover:bg-muted"
-          >
-            Solicitar demo
-            <Icon name="arrow" class="h-4 w-4" />
-          </a>
-          <a
-            href="#funcionalidades"
-            class="inline-flex items-center justify-center rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-white/10"
-          >
-            Ver funcionalidades
-          </a>
+      <div class="relative" data-demo-cta>
+        <div data-cta-intro>
+          <h2 class="mx-auto max-w-2xl text-balance font-display text-[2rem] font-medium leading-[1.1] tracking-[-0.01em] text-accent-foreground sm:text-[2.5rem]">
+            ¿Quieres ver TicHub funcionando con datos de ejemplo?
+          </h2>
+          <p class="mx-auto mt-4 max-w-2xl text-pretty leading-relaxed text-accent-foreground/85">
+            Solicita una demo y recorre el ciclo completo: inventario, préstamo, devolución,
+            incidencia, consumo de material y auditoría.
+          </p>
+          <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              data-show-form
+              class="inline-flex items-center gap-2 rounded-lg bg-background px-6 py-3 text-sm font-semibold text-accent shadow-lg shadow-slate-900/10 transition-colors hover:bg-muted"
+            >
+              Solicitar demo
+              <Icon name="arrow" class="h-4 w-4" />
+            </button>
+            <a
+              href="#funcionalidades"
+              class="inline-flex items-center justify-center rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-white/10"
+            >
+              Ver funcionalidades
+            </a>
+          </div>
+        </div>
+
+        <form data-demo-form class="mx-auto hidden max-w-md text-left" novalidate>
+          <h2 class="mx-auto max-w-2xl text-balance text-center font-display text-[1.75rem] font-medium leading-[1.1] tracking-[-0.01em] text-accent-foreground">
+            Cuéntanos sobre tu centro
+          </h2>
+          <p class="mx-auto mt-3 max-w-2xl text-pretty text-center leading-relaxed text-accent-foreground/85">
+            Te contactamos en menos de 24-48h laborables para preparar la demo.
+          </p>
+
+          <div class="mt-7 space-y-4">
+            <div>
+              <label for="demo-nombre" class="mb-1 block text-sm font-medium text-accent-foreground">Nombre</label>
+              <input
+                id="demo-nombre"
+                name="nombre"
+                type="text"
+                required
+                autocomplete="name"
+                class="w-full rounded-lg border-0 bg-background px-4 py-2.5 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
+              />
+            </div>
+            <div>
+              <label for="demo-email" class="mb-1 block text-sm font-medium text-accent-foreground">Email</label>
+              <input
+                id="demo-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="w-full rounded-lg border-0 bg-background px-4 py-2.5 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
+              />
+            </div>
+            <div>
+              <label for="demo-centro" class="mb-1 block text-sm font-medium text-accent-foreground">Centro educativo</label>
+              <input
+                id="demo-centro"
+                name="centro"
+                type="text"
+                required
+                autocomplete="organization"
+                class="w-full rounded-lg border-0 bg-background px-4 py-2.5 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
+              />
+            </div>
+            <div>
+              <label for="demo-mensaje" class="mb-1 block text-sm font-medium text-accent-foreground">
+                Mensaje <span class="font-normal text-accent-foreground/70">(opcional)</span>
+              </label>
+              <textarea
+                id="demo-mensaje"
+                name="mensaje"
+                rows="3"
+                class="w-full rounded-lg border-0 bg-background px-4 py-2.5 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
+              ></textarea>
+            </div>
+
+            <!-- Honeypot anti-spam: invisible para personas, los bots suelen rellenar todo. -->
+            <div class="absolute left-[-9999px]" aria-hidden="true">
+              <label for="demo-web">Web</label>
+              <input id="demo-web" name="web" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+          </div>
+
+          <p data-form-error class="mt-4 hidden text-sm font-medium text-red-100" role="alert"></p>
+
+          <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button
+              type="submit"
+              data-submit-button
+              class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-background px-6 py-3 text-sm font-semibold text-accent shadow-lg shadow-slate-900/10 transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+            >
+              <span data-submit-label>Enviar solicitud</span>
+            </button>
+            <button
+              type="button"
+              data-cancel-form
+              class="inline-flex items-center justify-center rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-white/10"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+
+        <div data-demo-success class="hidden text-center">
+          <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-background/95">
+            <Icon name="check" class="h-7 w-7 text-accent" />
+          </div>
+          <h2 class="mx-auto mt-5 max-w-2xl text-balance font-display text-[1.75rem] font-medium leading-[1.1] tracking-[-0.01em] text-accent-foreground">
+            ¡Solicitud enviada!
+          </h2>
+          <p class="mx-auto mt-3 max-w-md text-pretty leading-relaxed text-accent-foreground/85">
+            Gracias, hemos recibido tu solicitud. Te contactaremos en menos de 24-48h laborables.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  // Piezas decorativas: los 6 módulos de TicHub, dispersos en las esquinas.
+  // Al abrir el formulario "estallan" y se recomponen en dos filas abajo.
+  const PIECE_DEFS: { name: string; path: string; zone: "tr" | "bl"; side: "l" | "r" }[] = [
+    {
+      name: "Inventario",
+      zone: "tr",
+      side: "r",
+      path: '<path d="M21 8V6a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 6v12a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 18v-2"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
+    },
+    {
+      name: "Préstamos",
+      zone: "tr",
+      side: "l",
+      path: '<path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/>',
+    },
+    {
+      name: "Incidencias",
+      zone: "tr",
+      side: "r",
+      path: '<circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
+    },
+    {
+      name: "Consumibles",
+      zone: "bl",
+      side: "l",
+      path: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
+    },
+    {
+      name: "Compras",
+      zone: "bl",
+      side: "r",
+      path: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
+    },
+    {
+      name: "Auditoría",
+      zone: "bl",
+      side: "l",
+      path: '<rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 14h6"/><path d="M9 10h6"/>',
+    },
+  ]
+  const PIECE_SIZE = 40
+
+  document.querySelectorAll<HTMLElement>("[data-cta-box]").forEach((box) => {
+    const layer = box.querySelector<HTMLElement>("[data-pieces-layer]")
+    const burstRing = box.querySelector<HTMLElement>("[data-burst-ring]")
+    const root = box.querySelector<HTMLElement>("[data-demo-cta]")
+    const intro = root?.querySelector<HTMLElement>("[data-cta-intro]")
+    const form = root?.querySelector<HTMLFormElement>("[data-demo-form]")
+    const success = root?.querySelector<HTMLElement>("[data-demo-success]")
+    const showFormBtn = root?.querySelector<HTMLButtonElement>("[data-show-form]")
+    const cancelBtn = root?.querySelector<HTMLButtonElement>("[data-cancel-form]")
+    const submitBtn = root?.querySelector<HTMLButtonElement>("[data-submit-button]")
+    const submitLabel = root?.querySelector<HTMLElement>("[data-submit-label]")
+    const errorEl = root?.querySelector<HTMLElement>("[data-form-error]")
+    if (
+      !layer ||
+      !burstRing ||
+      !root ||
+      !intro ||
+      !form ||
+      !success ||
+      !showFormBtn ||
+      !cancelBtn ||
+      !submitBtn ||
+      !submitLabel ||
+      !errorEl
+    )
+      return
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    // --- Piezas: crear elementos ---
+    const pieceEls = PIECE_DEFS.map((p) => {
+      const el = document.createElement("div")
+      el.className =
+        "absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-[11px] text-accent shadow-[0_8px_18px_-8px_rgba(10,22,46,0.35)] transition-[transform,opacity,background,box-shadow] duration-[850ms] [transition-timing-function:cubic-bezier(0.22,1.4,0.36,1)]"
+      el.style.background = "color-mix(in oklab, var(--color-background) 85%, transparent)"
+      el.title = p.name
+      el.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p.path}</svg>`
+      layer.appendChild(el)
+      return el
+    })
+
+    type Pos = { x: number; y: number; rot: number; depth: number }
+    let scatter: Pos[] = []
+    let mode: "idle" | "exploding" | "framed" = "idle"
+
+    const rand = (min: number, max: number) => Math.random() * (max - min) + min
+
+    function zoneRect(zone: "tr" | "bl", w: number, h: number) {
+      const pad = 16
+      const size = Math.min(190, w * 0.4)
+      if (zone === "tr") return { x0: w - size - pad, x1: w - pad - PIECE_SIZE, y0: pad, y1: pad + size * 0.6 }
+      return { x0: pad, x1: pad + size - PIECE_SIZE, y0: h - pad - size * 0.6, y1: h - pad - PIECE_SIZE }
+    }
+
+    function scatterPositions() {
+      const w = box.clientWidth
+      const h = box.clientHeight
+      scatter = PIECE_DEFS.map((p) => {
+        const r = zoneRect(p.zone, w, h)
+        return {
+          x: rand(r.x0, Math.max(r.x0, r.x1)),
+          y: rand(r.y0, Math.max(r.y0, r.y1)),
+          rot: rand(-24, 24),
+          depth: rand(0.5, 1),
+        }
+      })
+    }
+
+    function applyScatter() {
+      pieceEls.forEach((el, i) => {
+        const s = scatter[i]
+        el.style.transform = `translate(${s.x}px,${s.y}px) rotate(${s.rot}deg)`
+        el.style.opacity = "1"
+        el.classList.remove("is-framed")
+        el.style.background = "color-mix(in oklab, var(--color-background) 85%, transparent)"
+        el.style.boxShadow = "0 8px 18px -8px rgba(10,22,46,0.35)"
+      })
+    }
+
+    function onScroll() {
+      if (mode !== "idle" || reduceMotion) return
+      const rect = box.getBoundingClientRect()
+      const vh = window.innerHeight
+      let progress = (vh - rect.top) / (vh + rect.height)
+      progress = Math.max(-1, Math.min(1, progress))
+      pieceEls.forEach((el, i) => {
+        const s = scatter[i]
+        const sign = PIECE_DEFS[i].zone === "tr" ? 1 : -1
+        const drift = progress * 16 * s.depth * sign
+        const rot = s.rot + progress * 20 * s.depth * sign
+        el.style.transform = `translate(${s.x}px,${s.y + drift}px) rotate(${rot}deg)`
+      })
+    }
+
+    function explodeThenFrame() {
+      mode = "exploding"
+      const w = box.clientWidth
+      const h = box.clientHeight
+      const cx = w / 2
+      const cy = h / 2
+
+      burstRing.style.transform = "translate(-50%, -50%) scale(1)"
+      burstRing.style.opacity = "0.9"
+      burstRing.style.transition = "none"
+      // Forzar reflow para reiniciar la animación si se repite.
+      void burstRing.offsetWidth
+      burstRing.style.transition = "transform 0.6s cubic-bezier(0.2,0.7,0.3,1), opacity 0.6s cubic-bezier(0.2,0.7,0.3,1)"
+      requestAnimationFrame(() => {
+        burstRing.style.transform = "translate(-50%, -50%) scale(11)"
+        burstRing.style.opacity = "0"
+      })
+
+      pieceEls.forEach((el, i) => {
+        const s = scatter[i]
+        const px = s.x + PIECE_SIZE / 2
+        const py = s.y + PIECE_SIZE / 2
+        const dx = px - cx
+        const dy = py - cy
+        const len = Math.sqrt(dx * dx + dy * dy) || 1
+        const outX = s.x + (dx / len) * 90
+        const outY = s.y + (dy / len) * 90
+        el.style.transitionDuration = "260ms"
+        el.style.transitionTimingFunction = "cubic-bezier(0.4,0,0.2,1)"
+        el.style.transform = `translate(${outX}px,${outY}px) rotate(${s.rot + rand(120, 220) * (i % 2 ? 1 : -1)}deg) scale(1.35)`
+      })
+
+      window.setTimeout(() => {
+        intro.classList.add("hidden")
+        form.classList.remove("hidden")
+        form.querySelector<HTMLInputElement>("#demo-nombre")?.focus()
+        frame()
+      }, 230)
+    }
+
+    function frame() {
+      mode = "framed"
+      const w = box.clientWidth
+      const h = box.clientHeight
+      const gap = 10
+      const y = h - 14 - PIECE_SIZE
+      const leftIndices = PIECE_DEFS.map((p, i) => (p.side === "l" ? i : -1)).filter((i) => i >= 0)
+      const rightIndices = PIECE_DEFS.map((p, i) => (p.side === "r" ? i : -1)).filter((i) => i >= 0)
+
+      const place = (indices: number[], fromLeftEdge: boolean) => {
+        indices.forEach((idx, k) => {
+          const x = fromLeftEdge ? 14 + k * (PIECE_SIZE + gap) : w - 14 - PIECE_SIZE - k * (PIECE_SIZE + gap)
+          const el = pieceEls[idx]
+          el.style.transitionDuration = "850ms"
+          el.style.transitionTimingFunction = "cubic-bezier(0.22,1.4,0.36,1)"
+          el.style.transitionDelay = `${(k % 3) * 60}ms`
+          el.style.transform = `translate(${x}px,${y}px) rotate(0deg) scale(1)`
+          el.style.background = "color-mix(in oklab, var(--color-background) 22%, transparent)"
+          el.style.boxShadow = "none"
+          el.classList.add("is-framed")
+        })
+      }
+      place(leftIndices, true)
+      place(rightIndices, false)
+    }
+
+    function resetToScattered() {
+      mode = "idle"
+      form.classList.add("hidden")
+      hideError()
+      intro.classList.remove("hidden")
+      pieceEls.forEach((el) => {
+        el.style.transitionDelay = "0ms"
+      })
+      scatterPositions()
+      applyScatter()
+    }
+
+    const showError = (message: string) => {
+      errorEl.textContent = message
+      errorEl.classList.remove("hidden")
+    }
+    const hideError = () => errorEl.classList.add("hidden")
+
+    // --- Estado inicial ---
+    scatterPositions()
+    applyScatter()
+    if (reduceMotion) {
+      // Sin animación: que empiecen ya en su lugar de reposo disperso (sin scroll-drift).
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", () => {
+      if (mode === "idle") {
+        scatterPositions()
+        applyScatter()
+      } else if (mode === "framed") {
+        frame()
+      }
+    })
+
+    showFormBtn.addEventListener("click", () => {
+      if (mode !== "idle") return
+      if (reduceMotion) {
+        intro.classList.add("hidden")
+        form.classList.remove("hidden")
+        form.querySelector<HTMLInputElement>("#demo-nombre")?.focus()
+        frame()
+        return
+      }
+      explodeThenFrame()
+    })
+
+    cancelBtn.addEventListener("click", resetToScattered)
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault()
+      hideError()
+
+      const formData = new FormData(form)
+      const payload = {
+        nombre: String(formData.get("nombre") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        centro: String(formData.get("centro") ?? ""),
+        mensaje: String(formData.get("mensaje") ?? ""),
+        web: String(formData.get("web") ?? ""),
+      }
+
+      submitBtn.disabled = true
+      submitLabel.textContent = "Enviando…"
+
+      try {
+        const res = await fetch("/api/demo", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null
+
+        if (!res.ok || !data?.ok) {
+          showError(data?.error || "No se pudo enviar el formulario. Inténtalo de nuevo en unos minutos.")
+          submitBtn.disabled = false
+          submitLabel.textContent = "Enviar solicitud"
+          return
+        }
+
+        // Las piezas se quedan ya ordenadas (enmarcando también el mensaje de éxito).
+        form.classList.add("hidden")
+        success.classList.remove("hidden")
+      } catch {
+        showError("No se pudo conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.")
+        submitBtn.disabled = false
+        submitLabel.textContent = "Enviar solicitud"
+      }
+    })
+  })
+</script>
