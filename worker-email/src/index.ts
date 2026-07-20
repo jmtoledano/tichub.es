@@ -40,6 +40,8 @@ export default {
     const nombre = String(data.nombre ?? "").trim()
     const email = String(data.email ?? "").trim()
     const centro = String(data.centro ?? "").trim()
+    const ciudad = String(data.ciudad ?? "").trim()
+    const provincia = String(data.provincia ?? "").trim()
     const mensaje = String(data.mensaje ?? "").trim()
     // Honeypot: campo oculto para personas, que los bots de spam suelen rellenar.
     const honeypot = String(data.web ?? "").trim()
@@ -49,7 +51,7 @@ export default {
       return jsonResponse({ ok: true }, 200)
     }
 
-    if (!nombre || !email || !centro) {
+    if (!nombre || !email || !centro || !ciudad || !provincia) {
       return jsonResponse({ ok: false, error: "Faltan campos obligatorios." }, 400)
     }
     if (!EMAIL_RE.test(email)) {
@@ -59,7 +61,7 @@ export default {
     const msg = createMimeMessage()
     msg.setSender({ addr: FROM_ADDRESS, name: "TicHub — Formulario web" })
     msg.setRecipient(TO_ADDRESS)
-    msg.setSubject(`Solicitud de demo — ${nombre} (${centro})`)
+    msg.setSubject(`Solicitud de demo — ${nombre} (${centro}, ${ciudad})`)
     msg.addMessage({
       contentType: "text/plain",
       data:
@@ -67,6 +69,8 @@ export default {
         `Nombre: ${nombre}\n` +
         `Email: ${email}\n` +
         `Centro educativo: ${centro}\n` +
+        `Ciudad: ${ciudad}\n` +
+        `Provincia: ${provincia}\n` +
         `Mensaje: ${mensaje || "(sin mensaje)"}\n`,
     })
 

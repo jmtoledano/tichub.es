@@ -84,6 +84,30 @@ import Icon from "./Icon.astro"
                 class="w-full rounded-lg border-0 bg-background px-4 py-2.5 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
               />
             </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="demo-ciudad" class="mb-1 block text-sm font-medium text-accent-foreground">Ciudad</label>
+                <input
+                  id="demo-ciudad"
+                  name="ciudad"
+                  type="text"
+                  required
+                  autocomplete="address-level2"
+                  class="w-full rounded-lg border-0 bg-background px-4 py-2.5 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
+                />
+              </div>
+              <div>
+                <label for="demo-provincia" class="mb-1 block text-sm font-medium text-accent-foreground">Provincia</label>
+                <input
+                  id="demo-provincia"
+                  name="provincia"
+                  type="text"
+                  required
+                  autocomplete="address-level1"
+                  class="w-full rounded-lg border-0 bg-background px-4 py-2.5 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white"
+                />
+              </div>
+            </div>
             <div>
               <label for="demo-mensaje" class="mb-1 block text-sm font-medium text-accent-foreground">
                 Mensaje <span class="font-normal text-accent-foreground/70">(opcional)</span>
@@ -400,6 +424,8 @@ import Icon from "./Icon.astro"
         nombre: String(formData.get("nombre") ?? ""),
         email: String(formData.get("email") ?? ""),
         centro: String(formData.get("centro") ?? ""),
+        ciudad: String(formData.get("ciudad") ?? ""),
+        provincia: String(formData.get("provincia") ?? ""),
         mensaje: String(formData.get("mensaje") ?? ""),
         web: String(formData.get("web") ?? ""),
       }
